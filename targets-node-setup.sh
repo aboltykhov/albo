@@ -44,7 +44,7 @@ scrape_configs:
   - job_name: 'node_exporter_clients'
     scrape_interval: 5s
     static_configs:
-      - targets: ['localhost:9100','185.189.69.88:9100']
+      - targets: ['localhost:9100','185.177.95.17:9100']
 EOF
 #####################################################################
 #Отображение тревог
