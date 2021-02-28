@@ -31,3 +31,6 @@ git pull origin main && ls -lh
 #Отключить SElinux, требуется перезагрузка ОС
 cd /tmp/dz_itog
 ./selinux-off.sh
+
+#Если перезагрузка ОС не требуется, перейти в каталог со скриптами
+cd /tmp/dz_itog && ls -lh
