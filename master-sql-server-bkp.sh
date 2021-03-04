@@ -16,6 +16,7 @@ mysqldump -u root --password=User1589$ --all-databases --events --routines --mas
 
 
 #3)
+#НЕОБЯЗАТЕЛЬНО
 #копируем бекап c рабочего сервера 10.0.0.1 на новый сервер 10.0.0.3,
 #требуется знать пользователя и адрес нового сервера
 #ключ scp -r копирует папку целиком 
@@ -33,5 +34,3 @@ sudo mysql -u root --password=User1589$ -e "CREATE USER abrepl@10.0.0.3 IDENTIFI
 #ключ -e "TEXT" означатет выполнить команды в консоли mysql и выйти
 #проверяем и запоминаем из таблицы File: binlog.000000 и Position 000
 sudo mysql -u root --password=User1589$ -e "SELECT User, Host FROM mysql.user; SHOW MASTER STATUS\G"
-
-

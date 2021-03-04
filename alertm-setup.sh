@@ -1,20 +1,18 @@
-
-
 #!/bin/bash
+#Строки с решеткой кроме первой - комментарии
 yum install -y wget
 cd /tmp/
 wget https://github.com/prometheus/alertmanager/releases/download/v0.21.0/alertmanager-0.21.0.linux-amd64.tar.gz
 
-#Создать каталоги для alertmanager
+#Создаем каталоги в которые скопируем файлы  alertmanager
 mkdir /etc/alertmanager /var/lib/prometheus/alertmanager
-ls -l /etc/alertmanager && ls -l /var/lib/prometheus/alertmanager
-
-#Распределяем файлы по каталогам
 tar zxvf alertmanager-*.linux-amd64.tar.gz
 cd alertmanager-*.linux-amd64
+
+#Распределяем файлы по каталогам
 cp alertmanager amtool /usr/local/bin/ && cp alertmanager.yml /etc/alertmanager
 
-#Создаем пользователя alertmanager от которого будем запускать prometheus без домашней директории 
+#Создаем пользователя от которого будем запускать alertmanager без домашней директории 
 #и без возможности входа в консоль сервера
 useradd --no-create-home --shell /bin/false alertmanager
 
@@ -25,7 +23,8 @@ chown -R alertmanager:alertmanager /etc/alertmanager /var/lib/prometheus/alertma
 chown alertmanager:alertmanager /usr/local/bin/{alertmanager,amtool}
 #####################################################################
 #Создаем файл автозапуска alertmanager.service
-cat <<EOF >> /etc/systemd/system/alertmanager.service
+rm -rf /etc/systemd/system/alertmanager.service
+cat <<EOF > /etc/systemd/system/alertmanager.service
 
 [Unit]
 Description=Alertmanager Service
@@ -47,8 +46,11 @@ Restart=on-failure
 WantedBy=multi-user.target
 EOF
 #####################################################################
+#Задаем владельца для исполняемого файла, повторно
+chown alertmanager:alertmanager /usr/local/bin/{alertmanager,amtool}
+
 #Перечитываем конфигурацию
-systemctl daemon-reload && systemctl start alertmanager && systemctl enable alertmanager 
+systemctl daemon-reload && systemctl enable alertmanager && systemctl start alertmanager
 
 #Показать порты
 #ss -tnlp
