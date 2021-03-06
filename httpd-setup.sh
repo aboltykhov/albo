@@ -33,6 +33,7 @@ git pull origin main && ls -lh
 
 #Разворачиваем бекап
 #Ключ -a копировать содежимое с атрибутами
+cd /tmp/dz_web_server/
 cp -a web.bak/var/www/8080/index.html /var/www/8080
 cp -a web.bak/var/www/8081/index.html /var/www/8081
 cp -a web.bak/var/www/8082/index.html /var/www/8082
