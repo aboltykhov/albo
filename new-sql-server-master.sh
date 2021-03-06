@@ -34,7 +34,7 @@ datadir=/var/lib/mysql
 socket=/var/lib/mysql/mysql.sock
 log-error=/var/log/mysql/mysqld.log
 pid-file=/run/mysqld/mysqld.pid
-bind-address=10.0.0.3
+bind-address=10.0.0.1
 server-id=1
 EOF
 
@@ -47,11 +47,11 @@ systemctl restart mysqld
 #требуется знать пользователя и адрес сервера с бекапом
 #ключ scp -r копирует папку целиком 
 #вводим пароль пользователя adminroot
-scp -r adminroot@10.0.0.2:/tmp/backupDB-*.sql /tmp/
+#scp -r adminroot@10.0.0.2:/tmp/backupDB-*.sql /tmp/
 #sshpass -p Candyshop919 scp -r adminroot@10.0.0.1:/tmp/backupDB-*.sql /tmp/
 
 #на новом МАСТЕРЕ разворачиваем бекап
-sudo mysql -u root --password=User1589$ < /tmp/backupDB-*.sql
+#sudo mysql -u root --password=User1589$ < /tmp/backupDB-*.sql
 
 
 #5)
