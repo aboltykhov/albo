@@ -59,3 +59,14 @@ systemctl restart mysqld
 #ПРИ НЕОБХОДИМОСТИ меняет IP-адрес для слейва
 #ключ -e "TEXT" означатет выполнить команды в консоли mysql и выйти
 sudo mysql -u root --password=User1589$ -e "CREATE USER abrepl@10.0.0.2 IDENTIFIED WITH caching_sha2_password BY 'User1589Rep$'; GRANT REPLICATION SLAVE ON *.* TO abrepl@10.0.0.2; SELECT User, Host FROM mysql.user; SHOW MASTER STATUS\G"
+
+#создать БД, пользователя и предоставить ему права на созданную БД
+sudo mysql -u root --password=User1589$ -e "CREATE DATABASE db001; GRANT ALL PRIVILEGES ON db001.* TO abrepl2@10.0.0.2 WITH GRANT OPTION; FLUSH PRIVILEGES"
+
+#################################################################
+#Удалить пользователя
+#SHOW GRANTS FOR 'abrepl'@'10.0.0.2';
+#REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'abrepl'@'10.0.0.2';
+#DROP USER 'abrepl'@'10.0.0.2';
+#SHOW GRANTS FOR 'abrepl'@'10.0.0.2';
+#################################################################
