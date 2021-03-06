@@ -29,6 +29,7 @@ git config pull.rebase false && git init && git remote add origin git@github.com
 git pull origin main && ls -lh
 
 #Создаем папки
+rm -rf  /var/www/8080 /var/www/8081 /var/www/8082
 mkdir /var/www/8080 /var/www/8081 /var/www/8082
 
 #Разворачиваем бекап
@@ -47,3 +48,7 @@ echo && hostname -I && echo
 
 #Перечитать конфигурацию и показать статус
 systemctl restart httpd && systemctl status httpd
+
+#Установить MySQL 
+cd /tmp/dz_itog
+./new-sql-server-master.sh
