@@ -19,7 +19,6 @@ yum -y install git
 git config --global user.name "Alexey Boltykhov"
 git config --global user.email aboltykhov@mail.ru
 git config --global core.editor vi
-rm -rf /tmp/dz_itog
 mkdir dz_itog && cd dz_itog
 
 #Скачать бекап,
