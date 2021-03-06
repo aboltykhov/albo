@@ -27,6 +27,10 @@ git init && git remote add origin git@github.com:aboltykhov/dz_itog.git
 git pull origin main && ls -lh
 ##########################################################################
 #3)
+#Системная информация
+echo && hostnamectl && echo && hostname -I && echo
+
+#4)
 #Отключить SElinux, требуется перезагрузка ОС
 cd /tmp/dz_itog
 ./selinux-off.sh
