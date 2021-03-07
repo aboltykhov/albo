@@ -24,7 +24,7 @@ cd /tmp/ && mkdir dz_web_server && cd dz_web_server
 #Добавляем нужный репозиторий
 git config pull.rebase false && git init && git remote add origin git@github.com:aboltykhov/dz_web_server.git
 
-#Скачать бекап из репозитория,
+#Скачать бекап веб-сервера из репозитория,
 #Если не скачивает, проверить название ветки, в моем случае main
 git pull origin main && ls -lh
 

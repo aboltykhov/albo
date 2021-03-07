@@ -23,7 +23,7 @@ sudo mysql_secure_installation
 
 
 #3)
-#на новом МАСТЕРЕ настраиваем репликацию 
+#на МАСТЕРЕ настраиваем репликацию 
 #сделаем копию и отредактируем файл конфигра
 cp /etc/my.cnf.d/mysql-server.cnf /etc/my.cnf.d/mysql-server.cnf.bak
 rm -rf /etc/my.cnf.d/mysql-server.cnf
@@ -43,11 +43,12 @@ systemctl restart mysqld
 
 
 #4)
+#НЕОБЯЗАТЕЛЬНО
 #копируем бекап на новый МАСТЕР
 #требуется знать пользователя и адрес сервера с бекапом
 #ключ scp -r копирует папку целиком 
 #вводим пароль пользователя adminroot
-#scp -r adminroot@10.0.0.2:/tmp/backupDB-*.sql /tmp/
+#scp -r adminroot@10.0.0.3:/tmp/backupDB-*.sql /tmp/
 #sshpass -p Candyshop919 scp -r adminroot@10.0.0.1:/tmp/backupDB-*.sql /tmp/
 
 #на новом МАСТЕРЕ разворачиваем бекап
@@ -55,18 +56,29 @@ systemctl restart mysqld
 
 
 #5)
-#на новом МАСТЕРЕ настраиваем репликацию
+#на МАСТЕРЕ настраиваем репликацию
 #ПРИ НЕОБХОДИМОСТИ меняет IP-адрес для слейва
 #ключ -e "TEXT" означатет выполнить команды в консоли mysql и выйти
 sudo mysql -u root --password=User1589$ -e "CREATE USER abrepl@10.0.0.2 IDENTIFIED WITH caching_sha2_password BY 'User1589Rep$'; GRANT REPLICATION SLAVE ON *.* TO abrepl@10.0.0.2; SELECT User, Host FROM mysql.user; SHOW MASTER STATUS\G"
 
-#создать БД, пользователя и предоставить ему права на созданную БД
-sudo mysql -u root --password=User1589$ -e "CREATE DATABASE db001; GRANT ALL PRIVILEGES ON db001.* TO abrepl2@10.0.0.2 WITH GRANT OPTION; FLUSH PRIVILEGES"
+#Создать БД, пользователя и предоставить пользователю права на созданную БД
+sudo mysql -u root --password=User1589$ -e "CREATE DATABASE db001; CREATE USER 'dbuser'@'10.0.0.1' IDENTIFIED BY 'User1589$'; GRANT ALL ON db001.* TO 'dbuser'@'10.0.0.1' WITH GRANT OPTION; FLUSH PRIVILEGES; SHOW GRANTS FOR 'dbuser'@'10.0.0.1';"
 
+#ПРИМЕРЫ
+#Grant user permissions to all tables in my_database from localhost --
+#GRANT ALL ON my_database.* TO 'user'@'localhost';
+
+#Grant user permissions to my_table in my_database from localhost --
+#GRANT ALL ON my_database.my_table TO 'user'@'localhost';
+
+#Grant user permissions to all tables and databases from all hosts --
+#GRANT ALL ON *.* TO 'user'@'*';
+
+#FLUSH PRIVILEGES;
 #################################################################
 #Удалить пользователя
-#SHOW GRANTS FOR 'abrepl'@'10.0.0.2';
-#REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'abrepl'@'10.0.0.2';
-#DROP USER 'abrepl'@'10.0.0.2';
-#SHOW GRANTS FOR 'abrepl'@'10.0.0.2';
+#SHOW GRANTS FOR 'dbuser'@'10.0.0.1';
+#REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'dbuser'@'10.0.0.1';
+#DROP USER 'dbuser'@'10.0.0.1';
+#SHOW GRANTS FOR 'dbuser'@'10.0.0.1';
 #################################################################
