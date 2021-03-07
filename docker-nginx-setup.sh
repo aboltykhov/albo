@@ -39,7 +39,7 @@ docker pull aboltykhov/albo-nginx:nginx && docker run -d -p 80:80 aboltykhov/alb
 #################################################################
 rm -rf /tmp/dockerp
 #Установить MySQL слейв, для репликации БД
-cd /tmp/dz_itog
-./new-sql-server-slave.sh
+#cd /tmp/dz_itog
+#./new-sql-server-slave.sh
 
 
