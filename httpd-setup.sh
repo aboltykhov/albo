@@ -48,7 +48,7 @@ cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf/httpd.* /etc/httpd/conf/
 echo && hostname -I && echo 
 
 #Установка пакетов php и php-mysqlnd
-dnf install php php-mysqlnd
+dnf -y install php php-mysqlnd
 
 #Перечитать конфигурацию и показать статус
 systemctl restart httpd && systemctl status httpd
