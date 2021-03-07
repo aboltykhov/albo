@@ -20,12 +20,12 @@ git config --global user.name "Alexey Boltykhov"
 git config --global user.email aboltykhov@mail.ru
 git config --global core.editor vi
 git config pull.rebase false
-mkdir dz_itog && cd dz_itog
+#mkdir dz_itog && cd dz_itog
 
 #Скачать бекап,
 #Если не скачивает, проверить название ветки, в моем случае main
-git init && git remote add origin git@github.com:aboltykhov/dz_itog.git
-git pull origin main && ls -lh && ls -lh /tmp/
+#git init && git remote add origin git@github.com:aboltykhov/dz_itog.git
+#git pull origin main && ls -lh && ls -lh /tmp/
 ##########################################################################
 #3)
 #Системная информация
