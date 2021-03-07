@@ -1,3 +1,5 @@
+#ПРЕЖДЕ! Должен быть подготовлен httpd (apache) на основном сервере
+#################################################################
 #!/bin/bash
 #Предварительно скрипт проверяет возможность своей работы от пользователя
 if [[ $UID -ne 0 ]]; then
@@ -35,3 +37,9 @@ docker pull aboltykhov/albo-nginx:nginx && docker run -d -p 80:80 aboltykhov/alb
 #docker stop <CONTAINER ID>
 #docker rm <CONTAINER ID>
 #################################################################
+
+#Установить MySQL слейв, для репликации БД
+cd /tmp/dz_itog
+./new-sql-server-slave.sh
+
+

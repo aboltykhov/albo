@@ -62,7 +62,7 @@ systemctl restart mysqld
 sudo mysql -u root --password=User1589$ -e "CREATE USER abrepl@10.0.0.2 IDENTIFIED WITH caching_sha2_password BY 'User1589Rep$'; GRANT REPLICATION SLAVE ON *.* TO abrepl@10.0.0.2; SELECT User, Host FROM mysql.user; SHOW MASTER STATUS\G"
 
 #Создать БД, пользователя и предоставить пользователю права на созданную БД
-sudo mysql -u root --password=User1589$ -e "CREATE DATABASE db001; CREATE USER 'dbuser'@'10.0.0.1' IDENTIFIED BY 'User1589$'; GRANT ALL ON db001.* TO 'dbuser'@'10.0.0.1' WITH GRANT OPTION; FLUSH PRIVILEGES; SHOW GRANTS FOR 'dbuser'@'10.0.0.1';"
+#sudo mysql -u root --password=User1589$ -e "CREATE DATABASE db001; CREATE USER 'dbuser'@'10.0.0.1' IDENTIFIED BY 'User1589$'; GRANT ALL ON db001.* TO 'dbuser'@'10.0.0.1' WITH GRANT OPTION; FLUSH PRIVILEGES; SHOW GRANTS FOR 'dbuser'@'10.0.0.1';"
 
 #ПРИМЕРЫ
 #Grant user permissions to all tables in my_database from localhost --

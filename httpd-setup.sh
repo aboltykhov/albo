@@ -22,7 +22,8 @@ sudo yum -y install httpd && sudo systemctl enable httpd && sudo systemctl start
 cd /tmp/ && mkdir dz_web_server && cd dz_web_server
 
 #Добавляем нужный репозиторий
-git config pull.rebase false && git init && git remote add origin git@github.com:aboltykhov/dz_web_server.git
+git init && git remote add origin git@github.com:aboltykhov/dz_web_server.git
+git config pull.rebase false
 
 #Скачать бекап веб-сервера из репозитория,
 #Если не скачивает, проверить название ветки, в моем случае main
@@ -52,3 +53,5 @@ systemctl restart httpd && systemctl status httpd
 #Установить MySQL 
 cd /tmp/dz_itog
 ./new-sql-server-master.sh
+
+
