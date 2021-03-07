@@ -55,5 +55,8 @@ sudo mysql -u root --password=User1589$ -e "CHANGE MASTER TO MASTER_HOST='10.0.0
 sudo mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /tmp/"backupDB-"`date +"%Y-%m-%d"`.sql && sshpass -p Candyshop919 scp /tmp/backupDB-*.sql adminroot@10.0.0.3:/tmp
 
 
-#Добавить в планировщик регулярый бекап
+#Добавить в планировщик cron регулярый бекап
+#Запускать скрипт раз в день в 01:00
+sudo echo -e '0 1 * * * /tmp/dz_itog/bak-slave-sql-server.sh' | sudo crontab -
+
 
