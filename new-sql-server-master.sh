@@ -61,8 +61,13 @@ systemctl restart mysqld
 #ключ -e "TEXT" означатет выполнить команды в консоли mysql и выйти
 sudo mysql -u root --password=User1589$ -e "CREATE USER abrepl@10.0.0.2 IDENTIFIED WITH caching_sha2_password BY 'User1589Rep$'; GRANT REPLICATION SLAVE ON *.* TO abrepl@10.0.0.2; SELECT User, Host FROM mysql.user; SHOW MASTER STATUS\G"
 
-#Создать БД, пользователя и предоставить пользователю права на созданную БД
-#sudo mysql -u root --password=User1589$ -e "CREATE DATABASE db001; CREATE USER 'dbuser'@'10.0.0.1' IDENTIFIED BY 'User1589$'; GRANT ALL ON db001.* TO 'dbuser'@'10.0.0.1' WITH GRANT OPTION; FLUSH PRIVILEGES; SHOW GRANTS FOR 'dbuser'@'10.0.0.1';"
+#Создать тестовую БД, пользователя и предоставить пользователю права на созданную БД
+#ключ -e "TEXT" означатет выполнить команды в консоли mysql и выйти
+sudo mysql -u root --password=User1589$ -e "CREATE DATABASE db001; CREATE USER 'dbuser'@'localhost' IDENTIFIED BY 'User1589$'; GRANT ALL ON db001.* TO 'dbuser'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES; SHOW GRANTS FOR 'dbuser'@'localhost';"
+
+#Создать БД, пользователя для управления базой CMS WordPress и применить изменения
+#ключ -e "TEXT" означатет выполнить команды в консоли mysql и выйти
+sudo mysql -u root --password=User1589$ -e "CREATE DATABASE wordpress; CREATE USER 'wpuser'@'localhost' IDENTIFIED BY 'WP1password$'; GRANT ALL ON wordpress.* TO 'wpuser'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES; SHOW GRANTS FOR 'wpuser'@'localhost'; CREATE TABLE wordpress.list ( item_id INT AUTO_INCREMENT, content VARCHAR(255), PRIMARY KEY(item_id) ); INSERT INTO wordpress.list (content) VALUES ("Test albo item"); SELECT * FROM  wordpress.list;"
 
 #ПРИМЕРЫ
 #Grant user permissions to all tables in my_database from localhost --
@@ -77,8 +82,8 @@ sudo mysql -u root --password=User1589$ -e "CREATE USER abrepl@10.0.0.2 IDENTIFI
 #FLUSH PRIVILEGES;
 #################################################################
 #Удалить пользователя
-#SHOW GRANTS FOR 'dbuser'@'10.0.0.1';
-#REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'dbuser'@'10.0.0.1';
+#SELECT user,host FROM mysql.user;
+#REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'dbuser'@'localhost';
 #DROP USER 'dbuser'@'10.0.0.1';
-#SHOW GRANTS FOR 'dbuser'@'10.0.0.1';
+#SHOW GRANTS FOR 'dbuser'@'localhost';
 #################################################################

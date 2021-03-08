@@ -16,12 +16,17 @@ chmod 600 /etc/ssh/ssh_config.d/github.com.conf
 
 #Устанавка и запуск апача
 #Ключ -y отвечает Да на установку
-sudo yum -y install httpd && sudo systemctl enable httpd && sudo systemctl start httpd
+yum -y install httpd && sudo systemctl enable httpd && sudo systemctl start httpd
 
 #Подготовка git репозитория
 cd /tmp/ && mkdir dz_web_server && cd dz_web_server
 
-#Добавляем нужный репозиторий
+#Установить git и добавляем репозиторий ВЕБ-сервера
+yum -y install git
+git config --global user.name "Alexey Boltykhov"
+git config --global user.email aboltykhov@mail.ru
+git config --global core.editor vi
+git config pull.rebase false
 git init && git remote add origin git@github.com:aboltykhov/dz_web_server.git
 git config pull.rebase false
 
@@ -48,7 +53,44 @@ cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf/httpd.* /etc/httpd/conf/
 echo && hostname -I && echo 
 
 #Установка пакетов php и php-mysqlnd
-dnf -y install php php-mysqlnd
+dnf -y install php php-mysqlnd php-gd
+
+#Подготовка CMS WordPress 
+cd /tmp/
+wget http://wordpress.org/latest.tar.gz && tar xzvf latest.tar.gz
+rsync -avP /tmp/wordpress/ /var/www/html
+mkdir /var/www/html/wp-content/uploads
+sudo chown -R apache:apache /var/www/html/*
+cd /var/www/html/
+cp wp-config-sample.php wp-config.php
+
+#Создать скрипт PHP, который будет подключаться к mysql и запрашивать содержимое
+cat <<EOF > /var/www/html/albo.php
+<?php
+$user = "wpuser";
+$password = "WP1password$";
+$database = "wordpress";
+$table = "list";
+
+try {
+  $db = new PDO("mysql:host=localhost;dbname=$database", $user, $password);
+  echo "<h2>TODO</h2><ol>";
+  foreach($db->query("SELECT content FROM $table") as $row) {
+    echo "<li>" . $row['content'] . "</li>";
+  }
+  echo "</ol>";
+} catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+}
+EOF
+
+#Создать проверочный скрипт PHP
+cat <<EOF > /var/www/html/info.php
+<?php
+
+phpinfo();
+EOF
 
 #Перечитать конфигурацию и показать статус
 systemctl restart httpd && systemctl status httpd
