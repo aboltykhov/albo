@@ -1,0 +1,1 @@
+CREATE USER abrepl@10.0.0.2 IDENTIFIED WITH caching_sha2_password BY 'User1589Rep$'; GRANT REPLICATION SLAVE ON *.* TO abrepl@10.0.0.2; SELECT User, Host FROM mysql.user; SHOW MASTER STATUS\G; show databases;
