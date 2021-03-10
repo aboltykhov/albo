@@ -45,14 +45,22 @@ systemctl restart mysqld
 
 
 #4)
-#на SLAVE настраиваем репликацию
+#На SLAVE настраиваем репликацию
 #ключ -e "TEXT" означатет выполнить команды в консоли mysql и выйти
 sudo mysql -u root --password=User1589$ -e "CHANGE MASTER TO MASTER_HOST='10.0.0.1', MASTER_USER='abrepl', MASTER_PASSWORD='User1589Rep$', MASTER_LOG_FILE='binlog.000002', MASTER_LOG_POS=706, GET_MASTER_PUBLIC_KEY = 1; START SLAVE; SHOW SLAVE STATUS\G; show variables like '%read_only%';"
 
 
 #5)
+#Создать пользователя на 10.0.0.3 для передачи бекапов
+#rm -rf /tmp/bkps
+#userdel -rf bkpuser01
+#useradd --no-create-home --shell /bin/bash bkpuser01 && echo bkpuser01:bKpassword$ | chpasswd
+#mkdir -p /tmp/bkps && chown -R bkpuser01:bkpuser01 /tmp/bkps/
+
+
+#6)
 #Снять бекап cо СЛЕЙВА 10.0.0.2 и отправить на сервер бекапов 10.0.0.3
-sudo mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /tmp/"backupDB-"`date +"%Y-%m-%d"`.sql && sshpass -p Candyshop919 scp /tmp/backupDB-*.sql adminroot@10.0.0.3:/tmp
+sudo mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /tmp/"backupDB-"`date +"%Y-%m-%d"`.sql && sshpass -p bKpassword$ scp /tmp/backupDB-*.sql bkpuser01@10.0.0.3:/tmp/bkps/
 
 
 #Добавить в планировщик cron регулярый бекап
