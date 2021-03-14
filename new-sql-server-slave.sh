@@ -8,7 +8,8 @@ yum -y install wget
 wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 rpm -ivh epel-release-latest-8.noarch.rpm
 yum -y install sshpass
-
+ssh -o StrictHostKeyChecking=no adminroot@10.0.0.3
+ssh -o StrictHostKeyChecking=no adminroot@10.0.0.1
 
 #2)
 #на новом слеве устанавливаем mysql-server
