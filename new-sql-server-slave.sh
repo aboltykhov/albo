@@ -68,7 +68,12 @@ sudo mysqldump -u root --password=User1589$ --all-databases --events --routines 
 
 
 #Добавить в планировщик cron регулярый бекап
-#Запускать скрипт раз в день в 01:00
-sudo echo -e '0 1 * * * /tmp/dz_itog/bak-slave-sql-server.sh; 0 2 * * * mysql -h 10.0.0.3 -u root --password=User1589$ < /tmp/backupDB.sql'| sudo crontab -
+#Запускать скрипт раз в день в 01:00 и отправлять  на другой сервер в 02:00
+sudo echo -e '* * * * * /tmp/dz_itog/bak-slave-sql-server.sh; 0 2 * * * mysql -h 10.0.0.3 -u root --password=User1589$ < /tmp/backupDB.sql'| sudo crontab -
+
+
+#Следующий скрипт графана, далее прометей
+cd /tmp/dz_itog
+./node-exporter-client-setup.sh
 
 

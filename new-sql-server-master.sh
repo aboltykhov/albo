@@ -54,11 +54,11 @@ git pull origin main && ls -lh && ls -lh /tmp/
 #требуется знать пользователя и адрес сервера с бекапом
 #ключ scp -r копирует папку целиком 
 #вводим пароль пользователя adminroot
-#scp -r adminroot@10.0.0.3:/tmp/backupDB-*.sql /tmp/
-#sshpass -p <adminroot password> scp -r adminroot@10.0.0.1:/tmp/backupDB-*.sql /tmp/
+#scp -r adminroot@10.0.0.3:/tmp/backupDB.sql /tmp/
+#sshpass -p <adminroot password> scp -r adminroot@10.0.0.1:/tmp/backupDB.sql /tmp/
 
 #на новом МАСТЕРЕ разворачиваем бекап
-#sudo mysql -u root --password=User1589$ < /tmp/backupDB-*.sql
+#sudo mysql -u root --password=User1589$ < /tmp/backupDB.sql
 
 
 #5)
@@ -77,8 +77,14 @@ sudo mysql -u root --password=User1589$ < /tmp/dz_itog/wp-db-user.sql
 #Создать таблицу от имени пользователя wpuser, для проверки
 sudo mysql -u wpuser --password=WP1password$ < /tmp/dz_itog/wp-albo.sql
 
-#Следующий скрипт прометей
 
+#6)
+#Создать пользователя для копирования бекапов
+useradd -c "Backup User MySQL" -b /tmp/ bkpuser && echo bkpuser:bKpassword$ | chpasswd
+
+#Следующий скрипт графана, далее прометей
+cd /tmp/dz_itog
+./2-grafana-setup.sh
 #################################################################	
 #ПРИМЕРЫ
 #Grant user permissions to all tables in my_database from localhost --
