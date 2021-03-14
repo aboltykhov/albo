@@ -76,4 +76,3 @@ sudo echo -e '* * * * * /tmp/dz_itog/bak-slave-sql-server.sh; 0 2 * * * mysql -h
 cd /tmp/dz_itog
 ./node-exporter-client-setup.sh
 
-
