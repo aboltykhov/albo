@@ -35,7 +35,7 @@ git init && git remote add origin git@github.com:aboltykhov/dz_web_server.git
 git pull origin main && ls -lh && ls -lh /tmp/
 
 #Добавление пакетов php 
-yum install -y php php-mysqlnd php-json php-fpm php-opcache php-gd php-xml php-mbstring
+yum install -y php php-mysqlnd php-json php-pdo php-fpm php-opcache php-gd php-xml php-mbstring php-bcmath php-odbc php-pear php-xmlrpc php-soap
 systemctl start php-fpm && systemctl enable php-fpm
 
 #Создаем папки сайтов для примера
