@@ -60,11 +60,15 @@ sudo mysql -u root --password=User1589$ -e "CHANGE MASTER TO MASTER_HOST='10.0.0
 
 #6)
 #Снять бекап cо СЛЕЙВА 10.0.0.2 и отправить на сервер бекапов 10.0.0.3
-sudo mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /tmp/"backupDB-"`date +"%Y-%m-%d"`.sql && sshpass -p bKpassword$ scp /tmp/backupDB-*.sql bkpuser01@10.0.0.3:/tmp/bkps/
+#Без указания даты
+sudo mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /tmp/backupDB.sql && sshpass -p bKpassword$ scp /tmp/backupDB.sql bkpuser@10.0.0.3:/tmp/
+
+#С указанием даты
+#sudo mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /tmp/"backupDB-"`date +"%Y-%m-%d"`.sql && sshpass -p bKpassword$ scp /tmp/backupDB-*.sql bkpuser@10.0.0.3:/tmp/
 
 
 #Добавить в планировщик cron регулярый бекап
 #Запускать скрипт раз в день в 01:00
-sudo echo -e '0 1 * * * /tmp/dz_itog/bak-slave-sql-server.sh' | sudo crontab -
+sudo echo -e '0 1 * * * /tmp/dz_itog/bak-slave-sql-server.sh; 0 2 * * * mysql -h 10.0.0.3 -u root --password=User1589$ < /tmp/backupDB.sql'| sudo crontab -
 
 

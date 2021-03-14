@@ -57,13 +57,11 @@ cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf/httpd.* /etc/httpd/conf/
 
 #Подготовка CMS WordPress 
 cd /tmp/
-wget http://wordpress.org/latest.tar.gz && tar zvxf latest.tar.gz
-rsync -avP /tmp/wordpress/* /var/www/html/wordpress/
+wget http://wordpress.org/latest.tar.gz && tar zvxf latest.tar.gz -C /var/www/html/wordpress/
 mkdir /var/www/html/wordpress/wp-content/uploads
 cd /var/www/html/wordpress/
 rm -rf /var/www/html/wordpress/wp-config.php
 cp -a /tmp/dz_web_server/web.bak/var/www/html/wordpress/wp-config.php /var/www/html/wordpress/
-cp wp-config-sample.php
 chown -R apache:apache /var/www/html/wordpress/
 rm -Rf /tmp/wordpress/ && rm -Rf /tmp/latest.tar.gz
 

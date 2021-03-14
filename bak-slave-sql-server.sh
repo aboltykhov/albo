@@ -11,7 +11,9 @@
 
 #2)
 #Снять бекап cо СЛЕЙВА 10.0.0.2 и отправить на сервер бекапов 10.0.0.3
-sudo mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /tmp/"backupDB-"`date +"%Y-%m-%d"`.sql
-sshpass -p bKpassword$ scp /tmp/backupDB-*.sql bkpuser@10.0.0.3:/tmp/bkpuser
+sudo mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /tmp/backupDB.sql && sshpass -p bKpassword$ scp /tmp/backupDB.sql bkpuser@10.0.0.3:/tmp/
 
+#3)
+#на новом сервере, c указываем позицию бинлога
+#mysqlbinlog --start-position=526017 binlog.000002 | sudo mysql -u root -pUser1589$ < /tmp/backupDB.sql
 
