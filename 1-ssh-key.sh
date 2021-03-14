@@ -10,6 +10,7 @@ EOF
 
 #Права на файл ключей ssh
 chmod 600 /etc/ssh/ssh_config.d/github.com.conf
+ssh -o StrictHostKeyChecking=no git@github.com
 ssh -T git@github.com
 ##########################################################################
 #2)
