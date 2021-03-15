@@ -13,9 +13,8 @@ Host github.com
 EOF
 
 #Права на файл ключей ssh
-chmod 600 /etc/ssh/ssh_config.d/github.com.conf
+chmod 644 /etc/ssh/ssh_config.d/github.com.conf
 ssh -o StrictHostKeyChecking=no git@github.com
-ssh -o StrictHostKeyChecking=no adminroot@10.0.0.2
 echo && echo && ssh -T git@github.com
 
 #Устанавка и запуск апача

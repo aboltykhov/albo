@@ -8,8 +8,7 @@ yum -y install wget
 wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 rpm -ivh epel-release-latest-8.noarch.rpm
 yum -y install sshpass
-ssh -o StrictHostKeyChecking=no adminroot@10.0.0.3
-ssh -o StrictHostKeyChecking=no adminroot@10.0.0.1
+
 
 #2)
 #на новом слеве устанавливаем mysql-server
@@ -73,8 +72,7 @@ sudo mysqldump -u root --password=User1589$ --all-databases --events --routines 
 sudo echo -e '* * * * * /tmp/dz_itog/bak-slave-sql-server.sh; 0 2 * * * mysql -h 10.0.0.3 -u root --password=User1589$ < /tmp/backupDB.sql; 0 2 * * * mysql -h 10.0.0.1 -u root --password=User1589$ < /tmp/backupDB.sql'| sudo crontab -
 
 
-#Следующий скрипт графана, далее прометей
+#Следующий скрипт node-exporter для снияти метрик сервера
 cd /tmp/dz_itog
 ./node-exporter-client-setup.sh
-
 

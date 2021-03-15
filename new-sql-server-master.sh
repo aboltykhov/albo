@@ -82,7 +82,7 @@ sudo mysql -u wpuser --password=WP1password$ < /tmp/dz_itog/wp-albo.sql
 #Создать пользователя для копирования бекапов
 useradd -c "Backup User MySQL" -b /tmp/ bkpuser && echo bkpuser:bKpassword$ | chpasswd
 
-#Следующий скрипт графана, далее прометей
+#Следующий скрипт графана, после графаны - прометей
 cd /tmp/dz_itog
 ./2-grafana-setup.sh
 #################################################################	
