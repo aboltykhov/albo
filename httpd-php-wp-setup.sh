@@ -14,7 +14,6 @@ EOF
 
 #Права на файл ключей ssh
 chmod 644 /etc/ssh/ssh_config.d/github.com.conf
-ssh -o StrictHostKeyChecking=no git@github.com
 echo && echo && ssh -T git@github.com
 
 #Устанавка и запуск апача
@@ -76,5 +75,4 @@ echo && hostname -I && echo
 #Установить MySQL 
 cd /tmp/dz_web_server/
 ./selinux-off.sh
-
 
