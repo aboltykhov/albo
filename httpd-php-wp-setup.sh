@@ -27,12 +27,12 @@ git config --global user.name "Alexey Boltykhov"
 git config --global user.email aboltykhov@mail.ru
 git config --global core.editor vi
 git config pull.rebase false
-cd /tmp/ && mkdir dz_web_server && cd dz_web_server
+rm -rf /tmp/dz_web_server/
+cd /tmp/ && mkdir dz_web_server && cd /tmp/dz_web_server
 
 #Скачать бекап веб-сервера из репозитория,
-#Если не скачивает, проверить название ветки, в моем случае main
 git init && git remote add origin git@github.com:aboltykhov/dz_web_server.git
-git pull origin main && ls -lh && ls -lh /tmp/
+git pull origin main
 
 #Добавление пакетов php 
 yum install -y php php-mysqlnd php-json php-pdo php-fpm php-opcache php-gd php-xml php-mbstring php-bcmath php-odbc php-pear php-xmlrpc php-soap
@@ -69,10 +69,17 @@ rm -Rf /tmp/wordpress/ && rm -Rf /tmp/latest.tar.gz
 setenforce 0
 systemctl restart httpd && systemctl status httpd
 
+#Скачать бекап итоговой работы из репозитория
+rm -rf /tmp/dz_itog/
+cd /tmp/ && mkdir dz_itog && cd dz_itog
+git init && git remote add origin git@github.com:aboltykhov/dz_itog.git
+git config pull.rebase false
+git pull origin main
+
 #Показать ip-адреса хоста
 echo && hostname -I && echo 
 
 #Установить MySQL 
-cd /tmp/dz_web_server/
-./selinux-off.sh
+cd /tmp/dz_itog/
+./new-sql-server-master.sh
 

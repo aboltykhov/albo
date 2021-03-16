@@ -1,8 +1,7 @@
 #!/bin/bash
-#Восстановление СЛЕЙВА
 #1)
 #на рабочем сервере, подготовка, чтобы копировать бекап без ввода пароля adminroot,
-#требуется установка утилиты sshpass, утилита не входит в комплект, поэтому добавим дополнительный пакет
+#требуется установка утилиты sshpass, утилита не входит в комплект, добавим доп. пакет
 cd /tmp
 yum -y install wget
 wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
@@ -11,7 +10,7 @@ yum -y install sshpass
 
 
 #2)
-#на новом слеве устанавливаем mysql-server
+#на SLAVE устанавливаем mysql-server
 cd /tmp
 yum update
 rpm -Uvh https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.rpm
@@ -42,15 +41,10 @@ EOF
 
 #Перезапустить службу
 systemctl restart mysqld
+sudo mysql -u root --password=User1589$ < /tmp/dz_itog/replication-slave.sql
 
 
 #4)
-#На SLAVE настраиваем репликацию
-#ключ -e "TEXT" означатет выполнить команды в консоли mysql и выйти
-sudo mysql -u root --password=User1589$ -e "CHANGE MASTER TO MASTER_HOST='10.0.0.1', MASTER_USER='abrepl', MASTER_PASSWORD='User1589Rep$', MASTER_LOG_FILE='binlog.000002', MASTER_LOG_POS=706, GET_MASTER_PUBLIC_KEY = 1; START SLAVE; SHOW SLAVE STATUS\G; show variables like '%read_only%';"
-
-
-#5)
 #Создать пользователя на 10.0.0.3 для передачи бекапов
 #rm -rf /tmp/bkps
 #userdel -rf bkpuser01
@@ -58,21 +52,19 @@ sudo mysql -u root --password=User1589$ -e "CHANGE MASTER TO MASTER_HOST='10.0.0
 #mkdir -p /tmp/bkps && chown -R bkpuser01:bkpuser01 /tmp/bkps/
 
 
-#6)
-#Снять бекап cо СЛЕЙВА 10.0.0.2 и отправить на сервер бекапов 10.0.0.3
+#5)
+#Снять первый бекап cо СЛЕЙВА 10.0.0.2 и смразу отправить на сервер бекапов 10.0.0.3
 #Без указания даты
-sudo mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /tmp/backupDB.sql && sshpass -p bKpassword$ scp /tmp/backupDB.sql bkpuser@10.0.0.3:/tmp/
+mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /home/adminroot/backupDB.sql && sshpass -p bKpassword$ scp /home/adminroot/backupDB.sql  bkpuser@10.0.0.3:/tmp/
 
 #С указанием даты
-#sudo mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /tmp/"backupDB-"`date +"%Y-%m-%d"`.sql && sshpass -p bKpassword$ scp /tmp/backupDB-*.sql bkpuser@10.0.0.3:/tmp/
+#mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /home/adminroot/"backupDB-"`date +"%Y-%m-%d"`.sql && sshpass -p bKpassword$ scp /home/adminroot/backupDB.sql bkpuser@10.0.0.3:/tmp/
 
+#Добавить в планировщик crontab регулярый бекап
+#Запускать скрипт каждую минуту и отправлять на другой сервер каждую вторую минуту
+sudo echo -e '01 * * * * /tmp/dz_itog/bak-slave-sql-server.sh; 02 * * * * mysql -h 10.0.0.3 -u root --password=User1589$ < /tmp/backupDB.sql'| sudo crontab -
 
-#Добавить в планировщик cron регулярый бекап
-#Запускать скрипт раз в день в 01:00 и отправлять  на другой сервер в 02:00
-sudo echo -e '* * * * * /tmp/dz_itog/bak-slave-sql-server.sh; 0 2 * * * mysql -h 10.0.0.3 -u root --password=User1589$ < /tmp/backupDB.sql; 0 2 * * * mysql -h 10.0.0.1 -u root --password=User1589$ < /tmp/backupDB.sql'| sudo crontab -
-
-
+#6)
 #Следующий скрипт node-exporter для снияти метрик сервера
 cd /tmp/dz_itog
 ./node-exporter-client-setup.sh
-

@@ -45,20 +45,10 @@ systemctl restart mysqld  && systemctl status mysqld
 
 #4)
 #Скачиваем репозиторий dz_itog
-cd /tmp/ && mkdir dz_itog && cd dz_itog
+rm -rf /tmp/dz_itog/
+cd /tmp/ && mkdir dz_itog && cd /tmp/dz_itog
 git init && git remote add origin git@github.com:aboltykhov/dz_itog.git
-git pull origin main && ls -lh && ls -lh /tmp/
-
-#НЕОБЯЗАТЕЛЬНО
-#копируем бекап на новый МАСТЕР
-#требуется знать пользователя и адрес сервера с бекапом
-#ключ scp -r копирует папку целиком 
-#вводим пароль пользователя adminroot
-#scp -r adminroot@10.0.0.3:/tmp/backupDB.sql /tmp/
-#sshpass -p <adminroot password> scp -r adminroot@10.0.0.1:/tmp/backupDB.sql /tmp/
-
-#на новом МАСТЕРЕ разворачиваем бекап
-#sudo mysql -u root --password=User1589$ < /tmp/backupDB.sql
+git pull origin main
 
 
 #5)
@@ -68,10 +58,10 @@ git pull origin main && ls -lh && ls -lh /tmp/
 #но удобнее импортировать из файла *.sql
 sudo mysql -u root --password=User1589$ < /tmp/dz_itog/replication.sql
 
-#Создать тестовую БД и тестового пользователя и предоставить пользователю права на созданную БД
-sudo mysql -u root --password=User1589$ < /tmp/dz_itog/db001.sql
+#Создать пользователя root@10.0.0.2 для переноса бекапов в каталог /tmp/ 
+sudo mysql -u root --password=User1589$ < /tmp/dz_itog/bkp-user.sql
 
-#Создать БД, пользователя для управления базой CMS WordPress и применить изменения
+#Создать БД, пользователя wpuser для управления БД CMS WordPress
 sudo mysql -u root --password=User1589$ < /tmp/dz_itog/wp-db-user.sql
 
 #Создать таблицу от имени пользователя wpuser, для проверки

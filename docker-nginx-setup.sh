@@ -21,7 +21,7 @@ systemctl start docker && systemctl enable docker && systemctl status docker
 
 
 #2)
-#Чтобы воспользоваться образом на другом компьютере, установи докер, затем:
+#Чтобы воспользоваться образом на другом компьютере, установи докер, далее
 #Ввести учетные данные, создав файл с паролем без вывода в терминал
 rm -rf /tmp/dockerp
 cat <<EOF > /tmp/dockerp
@@ -41,4 +41,3 @@ rm -rf /tmp/dockerp
 #Установить MySQL слейв, для репликации БД
 #cd /tmp/dz_itog
 ./new-sql-server-slave.sh
-
