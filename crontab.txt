@@ -1,0 +1,6 @@
+
+* * * * * /tmp/dz_itog/bak-slave-sql-server.sh
+
+2 * * * * /tmp/dz_itog/bak-send.sh
+~
+
