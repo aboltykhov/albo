@@ -58,16 +58,17 @@ sudo mysql -u root --password=User1589$ < /tmp/dz_itog/replication-slave.sql
 
 
 #5)
-#Снять первый бекап cо СЛЕЙВА 10.0.0.2 и смразу отправить на сервер бекапов 10.0.0.3
+#Снять первый бекап cо СЛЕЙВА 10.0.0.2 и сразу отправить на сервер бекапов 10.0.0.3
 #Без указания даты
 mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /home/adminroot/backupDB.sql && sshpass -p bKpassword$ scp /home/adminroot/backupDB.sql  bkpuser@10.0.0.3:/tmp/
 
 #С указанием даты
 #mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /home/adminroot/"backupDB-"`date +"%Y-%m-%d"`.sql && sshpass -p bKpassword$ scp /home/adminroot/backupDB.sql bkpuser@10.0.0.3:/tmp/
 
-#Добавить в планировщик crontab регулярый бекап
-#Запускать скрипт каждую минуту и отправлять на другой сервер каждую вторую минуту
-sudo echo -e '01 * * * * /tmp/dz_itog/bak-slave-sql-server.sh; 02 * * * * mysql -h 10.0.0.3 -u root --password=User1589$ < /tmp/backupDB.sql'| sudo crontab -
+#Добавить задания в планировщик crontab
+#Запускать скрипт каждую минуту создавая бекап и отправлять бекап на другой сервер каждую вторую минуту
+crontab < /tmp/dz_itog/crontab.txt
+
 
 #6)
 #Следующий скрипт node-exporter для снияти метрик сервера
