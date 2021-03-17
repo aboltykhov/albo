@@ -15,10 +15,10 @@
 Server 1						      #Каталог содержит скрипты, порядок запуска скриптов по номеру
 
 0.selinux-off 				    #Отключавем SELinux
-1.
-2.httpd-php-wp-setup	    #Установка apache/php/cms
-3.
-4.new-sql-server-master		#СУБД MySQL c настриваемой репликацией master
+
+httpd-php-wp-setup	    #Установка apache/php/cms
+
+new-sql-server-master		#СУБД MySQL c настриваемой репликацией master
 
 
 
@@ -39,12 +39,12 @@ targets-node-setup.sh
 Server 2						      #Каталог содержит скрипты, порядок запуска скриптов по номеру
 
 0.selinux-off					    #Отключавем SELinux
-1.
-2.docker-nginx-setup			#
-3.
-4.new-sql-server-slave		#СУБД MySQL c настриваемой репликацией slave
-5.
-6.node-exporter-client-setup
+
+docker-nginx-setup			#
+
+new-sql-server-slave		#СУБД MySQL c настриваемой репликацией slave
+
+node-exporter-client-setup
 
 ####################################################
 
