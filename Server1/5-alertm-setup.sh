@@ -12,14 +12,14 @@ cd alertmanager-*.linux-amd64
 #Распределяем файлы по каталогам
 cp alertmanager amtool /usr/local/bin/ && cp alertmanager.yml /etc/alertmanager
 
-#Создаем пользователя от которого будем запускать alertmanager без домашней директории 
-#и без возможности входа в консоль сервера
+#Создать пользователя без домашней директории и без возможности входа в консоль сервера 
+#От которого запускается alertmanager
 useradd --no-create-home --shell /bin/false alertmanager
 
-#Задаем владельца для каталогов, которые мы создали на предыдущем шаге
+#Сделать пользователя владельцем каталогов
 chown -R alertmanager:alertmanager /etc/alertmanager /var/lib/prometheus/alertmanager
 
-#Задаем владельца для скопированных файлов
+#Сделать пользователя владельцем для скопированных файлов
 chown alertmanager:alertmanager /usr/local/bin/{alertmanager,amtool}
 #####################################################################
 #Создаем файл автозапуска alertmanager.service
@@ -49,12 +49,15 @@ EOF
 chown alertmanager:alertmanager /usr/local/bin/{alertmanager,amtool}
 
 #Перечитываем конфигурацию
-systemctl daemon-reload && systemctl enable alertmanager && systemctl start alertmanager
+sudo systemctl daemon-reload && sudo systemctl enable alertmanager && sudo systemctl start alertmanager
+
+#Удалить установочный пакет 
+rm -rf /tmp/alertmanager-*
 
 #Показать порты
 echo && ss -tnlp && echo
 
 #Установить node_exporter
-cd /tmp/dz_itog/Server1
+cd /tmp/albo/Server1
 ./6-node-exporter-setup.sh
 

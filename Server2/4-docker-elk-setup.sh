@@ -5,12 +5,14 @@ echo "Скрипт требуется запустить в привилегир
 exit 1; fi
 
 #Установить утилиту yum-config-manager 
-yum install -y yum-utils
+yum -y install yum-utils
 
-#установить и обновить Docker из репозитория
+#Установить или обновить Docker из репозитория
 yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
+    
+yum update
 
 #Добавить пользователя в группу docker для управления докером, не используя sudo
 sudo usermod -aG docker $SUDO_USER
@@ -32,3 +34,4 @@ git clone https://github.com/deviantony/docker-elk
 cd /tmp/docker-elk
 docker-compose up
 
+#Всё!

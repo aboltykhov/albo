@@ -1,4 +1,4 @@
 
-* * * * * /tmp/dz_itog/bak-slave-sql-server.sh
+* * * * * /tmp/albo/bak-slave-sql-server.sh
 
-2 * * * * /tmp/dz_itog/bak-send.sh
+2 * * * * /tmp/albo/bak-send.sh

@@ -6,22 +6,21 @@ exit 1; fi
 
 #Устанавка и запуск апача
 #Ключ -y отвечает Да на установку
-yum -y install httpd && sudo systemctl enable httpd && sudo systemctl start httpd
+sudo yum -y install httpd && sudo systemctl enable httpd && sudo systemctl start httpd
 
-#Установка, подготовка git и добавление репозитория веб-сервера
-#Ключ -y отвечает Да на установку
-yum -y install git
+#Установка пакетов php
+sudo yum install -y php php-mysqlnd php-json php-pdo php-fpm php-opcache php-gd php-xml php-mbstring php-bcmath php-odbc php-pear php-xmlrpc php-soap
+sudo systemctl start php-fpm && sudo systemctl enable php-fpm
+
+#Скачать репозиторий веб-сервера
 rm -rf /tmp/dz_web_server/
+cd /tmp/
 git clone https://github.com/aboltykhov/dz_web_server.git
 cd /tmp/dz_web_server/
 
-#Добавление пакетов php 
-yum install -y php php-mysqlnd php-json php-pdo php-fpm php-opcache php-gd php-xml php-mbstring php-bcmath php-odbc php-pear php-xmlrpc php-soap
-systemctl start php-fpm && systemctl enable php-fpm
-
-#Создаем папки сайтов для примера
-rm -rf  /var/www/8080 /var/www/8081 /var/www/8082 /var/www/html/
-mkdir /var/www/8080 /var/www/8081 /var/www/8082 /var/www/html/
+#Создать папки сайтов для примера
+rm -rf  /var/www/8080 /var/www/8081 /var/www/8082 /var/www/html/ && echo
+mkdir /var/www/8080 /var/www/8081 /var/www/8082 /var/www/html/ && echo
 
 #Разворачиваем бекап
 #Ключ -a копировать содежимое с атрибутами
@@ -30,34 +29,37 @@ cp -a /tmp/dz_web_server/web.bak/var/www/8081/* /var/www/8081/ && echo
 cp -a /tmp/dz_web_server/web.bak/var/www/8082/* /var/www/8082/ && echo
 cp -a /tmp/dz_web_server/web.bak/var/www/html/* /var/www/html/ && echo
 
-cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf.d/8080.conf /etc/httpd/conf.d/
-cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf.d/8081.conf /etc/httpd/conf.d/
-cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf.d/8082.conf /etc/httpd/conf.d/
+cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf.d/8080.conf /etc/httpd/conf.d/ && echo
+cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf.d/8081.conf /etc/httpd/conf.d/ && echo
+cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf.d/8082.conf /etc/httpd/conf.d/ && echo
 rm -rf /etc/httpd/conf/httpd.conf
-cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf/httpd.* /etc/httpd/conf/
+cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf/httpd.* /etc/httpd/conf/ && echo
+
+#Установить утилиту для загрузки файлов
+yum -y install wget
 
 #Подготовка CMS WordPress 
 cd /tmp/
-wget http://wordpress.org/latest.tar.gz && tar zvxf latest.tar.gz -C /var/www/html/
+wget http://wordpress.org/latest.tar.gz && tar zvxf latest.tar.gz -C /var/www/html/ && echo
 mkdir /var/www/html/wordpress/wp-content/uploads
-cd /var/www/html/wordpress/
+cd /var/www/html/wordpress/ 
 rm -rf /var/www/html/wordpress/wp-config.php
 cp -a /tmp/dz_web_server/web.bak/var/www/html/wordpress/wp-config.php /var/www/html/wordpress/
 chown -R apache:apache /var/www/html/wordpress/
 rm -Rf /tmp/wordpress/ && rm -Rf /tmp/latest.tar.gz
 
 #Перечитать конфигурацию и показать статус
-systemctl restart httpd && systemctl status httpd
+sudo systemctl restart httpd && systemctl status httpd
 
 #Скачать бекап итоговой работы из репозитория
-rm -rf /tmp/dz_itog/
+rm -rf /tmp/albo/
 cd /tmp/
-git clone https://github.com/aboltykhov/dz_itog.git
+git clone https://github.com/aboltykhov/albo.git
 
 #Показать ip-адреса хоста
 echo && hostname -I && echo 
 
 #Установить MySQL 
-cd /tmp/dz_itog/Server1
+cd /tmp/albo/Server1
 ./2-new-sql-server-master.sh
 

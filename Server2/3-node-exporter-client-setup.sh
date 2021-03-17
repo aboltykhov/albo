@@ -1,5 +1,10 @@
 #!/bin/bash
-#Строки с решеткой кроме первой - комментарии
+#Предварительно скрипт проверяет возможность своей работы от пользователя
+if [[ $UID -ne 0 ]]; then
+echo "Скрипт требуется запустить в привилегированном режиме sudo или от пользователя root"
+exit 1; fi
+
+#Установить утилиту для загрузки файлов
 yum install -y wget
 cd /tmp/
 wget https://github.com/prometheus/node_exporter/releases/download/v1.0.1/node_exporter-1.0.1.linux-amd64.tar.gz
@@ -8,19 +13,19 @@ wget https://github.com/prometheus/node_exporter/releases/download/v1.0.1/node_e
 tar zxvf node_exporter-*.linux-amd64.tar.gz
 cd node_exporter-*.linux-amd64
 
-#Копируем исполняемый файл в bin:
+#Копируем исполняемый файл в bin
 cp node_exporter /usr/local/bin/
 
-#Создаем пользователя nodeusr от которого будем запускать node_exporter без домашней директории
+#Создать пользователя без домашней директории и без возможности входа в консоль сервера 
+#От которого запускается node_exporter
 useradd --no-create-home --shell /bin/false nodeusr
 
-#Задаем владельца для исполняемого файла
+#Сделать пользователя владельцем исполняемого файла
 chown -R nodeusr:nodeusr /usr/local/bin/node_exporter
 #####################################################################
 #Создаем файл автозапуска node_exporter.service
 rm -rf /etc/systemd/system/node_exporter.service
 cat <<EOF > /etc/systemd/system/node_exporter.service
-
 [Unit]
 Description=Node Exporter Service
 Wants=network.target
@@ -42,9 +47,15 @@ EOF
 chown -R nodeusr:nodeusr /usr/local/bin/node_exporter
 
 #Перечитываем конфигурацию systemd:
-systemctl daemon-reload && systemctl enable node_exporter && systemctl start node_exporter 
+sudo systemctl daemon-reload && sudo systemctl enable node_exporter && sudo systemctl start node_exporter  
+
+#Удалить установочный пакет 
+rm -rf /tmp/node_exporter-*
 
 #Показать порты
-#ss -tnlp
+echo && ss -tnlp && echo
 
+#Установить ELK
+cd /tmp/albo/Server2
+./4-docker-elk-setup.sh
 

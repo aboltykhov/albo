@@ -13,17 +13,14 @@ wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 rpm -ivh epel-release-latest-8.noarch.rpm
 yum -y install sshpass
 
-
 #2)
 #на SLAVE устанавливаем mysql-server
-cd /tmp
-yum update
 rpm -Uvh https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.rpm
+yum update
 yum -y install mysql-server && systemctl enable mysqld && systemctl start mysqld && systemctl status mysqld
 
 #настраиваем mysql-server, создаем пароль для root, например - User1589$
 sudo mysql_secure_installation
-
 
 #3)
 #на SLAVE настраиваем репликацию 
@@ -46,32 +43,26 @@ EOF
 
 #Перезапустить службу
 systemctl restart mysqld
-sudo mysql -u root --password=User1589$ < /tmp/dz_itog/SQL/replication-slave.sql
-
+sudo mysql -u root --password=User1589$ < /tmp/albo/SQL/replication-slave.sql
 
 #4)
-#Создать пользователя на 10.0.0.3 для передачи бекапов
+#Создать пользователя для передачи бекапов
 #rm -rf /tmp/bkps
-#userdel -rf bkpuser01
-#useradd --no-create-home --shell /bin/bash bkpuser01 && echo bkpuser01:bKpassword$ | chpasswd
-#mkdir -p /tmp/bkps && chown -R bkpuser01:bkpuser01 /tmp/bkps/
-
+#userdel -rf bkpuser
+useradd --no-create-home --shell /bin/bash bkpuser && echo bkpuser:bKpassword$ | chpasswd
+mkdir -p /tmp/bkps && chown -R bkpuser:bkpuser /tmp/bkps/
 
 #5)
-#Снять первый бекап cо СЛЕЙВА 10.0.0.2 и сразу отправить на сервер бекапов 10.0.0.3
+#Снять первый бекап cо СЛЕЙВА 10.0.0.2
 #Без указания даты
-mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /home/adminroot/backupDB.sql && sshpass -p bKpassword$ scp /home/adminroot/backupDB.sql  bkpuser@10.0.0.3:/tmp/
-
-#С указанием даты
-#mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /home/adminroot/"backupDB-"`date +"%Y-%m-%d"`.sql && sshpass -p bKpassword$ scp /home/adminroot/backupDB.sql bkpuser@10.0.0.3:/tmp/
+mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /tmp/bkps/backupDB.sql
+#sshpass -p bKpassword$ scp /tmp/bkps/backupDB.sql bkpuser@10.0.0.3:/tmp/bkps/
 
 #Добавить задания в планировщик crontab
 #Запускать скрипт каждую минуту создавая бекап и отправлять бекап на другой сервер каждую вторую минуту
-crontab < /tmp/dz_itog/crontab.txt
-
+crontab < /tmp/albo/crontab.txt
 
 #6)
 #Следующий скрипт node-exporter для снияти метрик сервера
-cd /tmp/dz_itog/Server2
+cd /tmp/albo/Server2
 ./3-node-exporter-client-setup.sh
-
