@@ -75,5 +75,6 @@ EOF
 systemctl daemon-reload && systemctl restart prometheus && systemctl status prometheus
 
 #Показать порты
-ss -tnlp
+echo && ss -tnlp && echo
+
 

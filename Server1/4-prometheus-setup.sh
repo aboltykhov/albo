@@ -25,7 +25,6 @@ chown prometheus:prometheus /usr/local/bin/{prometheus,promtool}
 #Для автоматического старта Prometheus создадим новый юнит в systemd
 rm -rf /etc/systemd/system/prometheus.service
 cat <<EOF > /etc/systemd/system/prometheus.service
-
 [Unit]
 Description=Prometheus Service
 After=network.target
@@ -53,10 +52,9 @@ chown -R prometheus:prometheus /var/lib/prometheus
 systemctl daemon-reload && systemctl enable prometheus && systemctl start prometheus
 
 #Показать порты
-#ss -tnlp
+echo && ss -tnlp && echo
 
 #Установить Alertmanager
-cd /tmp/dz_itog
-./alertm-setup.sh
-
+cd /tmp/dz_itog/Server1
+./5-alertm-setup.sh
 

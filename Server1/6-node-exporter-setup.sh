@@ -45,10 +45,9 @@ chown -R nodeusr:nodeusr /usr/local/bin/node_exporter
 systemctl daemon-reload && systemctl enable node_exporter && systemctl start node_exporter 
 
 #Показать порты
-#ss -tnlp
+echo && ss -tnlp && echo
 
 #Установить targets_с_node_exporter_в_prometheus
-cd /tmp/dz_itog
-./targets-node-setup.sh
-
+cd /tmp/dz_itog/Server1
+./7-targets-node-setup.sh
 

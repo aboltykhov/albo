@@ -25,7 +25,6 @@ chown alertmanager:alertmanager /usr/local/bin/{alertmanager,amtool}
 #Создаем файл автозапуска alertmanager.service
 rm -rf /etc/systemd/system/alertmanager.service
 cat <<EOF > /etc/systemd/system/alertmanager.service
-
 [Unit]
 Description=Alertmanager Service
 After=network.target
@@ -53,10 +52,9 @@ chown alertmanager:alertmanager /usr/local/bin/{alertmanager,amtool}
 systemctl daemon-reload && systemctl enable alertmanager && systemctl start alertmanager
 
 #Показать порты
-#ss -tnlp
+echo && ss -tnlp && echo
 
 #Установить node_exporter
-cd /tmp/dz_itog
-./node-exporter-setup.sh
-
+cd /tmp/dz_itog/Server1
+./6-node-exporter-setup.sh
 

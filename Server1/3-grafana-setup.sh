@@ -8,5 +8,5 @@ yum -y install grafana-7.4.2-1.x86_64.rpm
 systemctl daemon-reload && systemctl enable grafana-server && systemctl start grafana-server
 
 #Установить поэтапно Prometheus
-cd /tmp/dz_itog
-./prometheus-setup.sh
+cd /tmp/dz_itog/Server1
+./4-prometheus-setup.sh

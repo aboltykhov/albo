@@ -77,8 +77,8 @@ sudo mysql -u wpuser --password=WP1password$ < /tmp/dz_itog/wp-albo.sql
 useradd -c "Backup User MySQL" -b /tmp/ bkpuser && echo bkpuser:bKpassword$ | chpasswd
 
 #Следующий скрипт графана, после графаны - прометей
-cd /tmp/dz_itog
-./2-grafana-setup.sh
+cd /tmp/dz_itog/Server1
+./3-grafana-setup.sh
 #################################################################	
 #ПРИМЕРЫ
 #Grant user permissions to all tables in my_database from localhost --
