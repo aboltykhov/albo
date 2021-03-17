@@ -19,21 +19,22 @@ git clone https://github.com/aboltykhov/dz_web_server.git
 cd /tmp/dz_web_server/
 
 #Создать папки сайтов для примера
-rm -rf  /var/www/8080 /var/www/8081 /var/www/8082 /var/www/html/ && echo
+rm -rf  /var/www/808* /var/www/html/ && echo
+rm -rf  /etc/httpd/conf.d/808* && echo
 mkdir /var/www/8080 /var/www/8081 /var/www/8082 /var/www/html/ && echo
 
 #Разворачиваем бекап
 #Ключ -a копировать содежимое с атрибутами
-cp -a /tmp/dz_web_server/web.bak/var/www/8080/* /var/www/8080/ && echo
-cp -a /tmp/dz_web_server/web.bak/var/www/8081/* /var/www/8081/ && echo
-cp -a /tmp/dz_web_server/web.bak/var/www/8082/* /var/www/8082/ && echo
-cp -a /tmp/dz_web_server/web.bak/var/www/html/* /var/www/html/ && echo
+cp -a /tmp/dz_web_server/web/var/www/8080/* /var/www/8080/ && echo
+cp -a /tmp/dz_web_server/web/var/www/8081/* /var/www/8081/ && echo
+cp -a /tmp/dz_web_server/web/var/www/8082/* /var/www/8082/ && echo
+cp -a /tmp/dz_web_server/web/var/www/html/* /var/www/html/ && echo
 
-cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf.d/8080.conf /etc/httpd/conf.d/ && echo
-cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf.d/8081.conf /etc/httpd/conf.d/ && echo
-cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf.d/8082.conf /etc/httpd/conf.d/ && echo
+cp -a /tmp/dz_web_server/web/etc/httpd/conf.d/8080.conf /etc/httpd/conf.d/ && echo
+cp -a /tmp/dz_web_server/web/etc/httpd/conf.d/8081.conf /etc/httpd/conf.d/ && echo
+cp -a /tmp/dz_web_server/web/etc/httpd/conf.d/8082.conf /etc/httpd/conf.d/ && echo
 rm -rf /etc/httpd/conf/httpd.conf
-cp -a /tmp/dz_web_server/web.bak/etc/httpd/conf/httpd.* /etc/httpd/conf/ && echo
+cp -a /tmp/dz_web_server/web/etc/httpd/conf/httpd.* /etc/httpd/conf/ && echo
 
 #Установить утилиту для загрузки файлов
 yum -y install wget
@@ -44,7 +45,7 @@ wget http://wordpress.org/latest.tar.gz && tar zvxf latest.tar.gz -C /var/www/ht
 mkdir /var/www/html/wordpress/wp-content/uploads
 cd /var/www/html/wordpress/ 
 rm -rf /var/www/html/wordpress/wp-config.php
-cp -a /tmp/dz_web_server/web.bak/var/www/html/wordpress/wp-config.php /var/www/html/wordpress/
+cp -a /tmp/dz_web_server/web/var/www/html/wordpress/wp-config.php /var/www/html/wordpress/
 chown -R apache:apache /var/www/html/wordpress/
 rm -Rf /tmp/wordpress/ && rm -Rf /tmp/latest.tar.gz
 
