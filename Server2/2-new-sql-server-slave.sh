@@ -46,7 +46,7 @@ EOF
 
 #Перезапустить службу
 systemctl restart mysqld
-sudo mysql -u root --password=User1589$ < /tmp/dz_itog/replication-slave.sql
+sudo mysql -u root --password=User1589$ < /tmp/dz_itog/SQL/replication-slave.sql
 
 
 #4)
@@ -72,5 +72,6 @@ crontab < /tmp/dz_itog/crontab.txt
 
 #6)
 #Следующий скрипт node-exporter для снияти метрик сервера
-cd /tmp/dz_itog
-./node-exporter-client-setup.sh
+cd /tmp/dz_itog/Server2
+./3-node-exporter-client-setup.sh
+

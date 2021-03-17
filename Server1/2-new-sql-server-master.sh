@@ -14,17 +14,15 @@ exit 1; fi
 #rpm -ivh epel-release-latest-8.noarch.rpm
 #yum -y install sshpass
 
-
 #2)
 #на новом МАСТЕРЕ устанавливаем mysql-server
-cd /tmp
+cd /tmp/
 yum update
 rpm -Uvh https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.rpm
 yum -y install mysql-server && systemctl enable mysqld && systemctl start mysqld
 
 #настраиваем mysql-server, создаем пароль для root, например - User1589$
 sudo mysql_secure_installation
-
 
 #3)
 #на МАСТЕРЕ настраиваем репликацию 
@@ -46,30 +44,27 @@ EOF
 #Перезапустить службу
 systemctl restart mysqld  && systemctl status mysqld
 
-
 #4)
 #Скачиваем репозиторий dz_itog
 rm -rf /tmp/dz_itog/
-cd /tmp/ && mkdir dz_itog && cd /tmp/dz_itog
-git init && git remote add origin git@github.com:aboltykhov/dz_itog.git
-git pull origin main
-
+cd /tmp/
+git clone https://github.com/aboltykhov/dz_itog.git
 
 #5)
 #на МАСТЕРЕ настраиваем репликацию
 #ПРИ НЕОБХОДИМОСТИ меняет IP-адрес для слейва
 #ключ -e "TEXT" означатет выполнить команды в консоли mysql и выйти
 #но удобнее импортировать из файла *.sql
-sudo mysql -u root --password=User1589$ < /tmp/dz_itog/replication.sql
+sudo mysql -u root --password=User1589$ < /tmp/dz_itog/SQL/replication.sql
 
 #Создать пользователя root@10.0.0.2 для переноса бекапов в каталог /tmp/ 
-sudo mysql -u root --password=User1589$ < /tmp/dz_itog/bkp-user.sql
+sudo mysql -u root --password=User1589$ < /tmp/dz_itog/SQL/bkp-user.sql
 
 #Создать БД, пользователя wpuser для управления БД CMS WordPress
-sudo mysql -u root --password=User1589$ < /tmp/dz_itog/wp-db-user.sql
+sudo mysql -u root --password=User1589$ < /tmp/dz_itog/SQL/wp-db-user.sql
 
 #Создать таблицу от имени пользователя wpuser, для проверки
-sudo mysql -u wpuser --password=WP1password$ < /tmp/dz_itog/wp-albo.sql
+sudo mysql -u wpuser --password=WP1password$ < /tmp/dz_itog/SQL/wp-albo.sql
 
 
 #6)
