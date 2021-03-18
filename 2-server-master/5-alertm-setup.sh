@@ -1,5 +1,10 @@
 #!/bin/bash
-#Строки с решеткой кроме первой - комментарии
+#Предварительно скрипт проверяет возможность своей работы от пользователя
+if [[ $UID -ne 0 ]]; then
+echo "Скрипт требуется запустить в привилегированном режиме sudo или от пользователя root"
+exit 1; fi
+
+#Установить утилиту для загрузки файлов
 yum install -y wget
 cd /tmp/
 wget https://github.com/prometheus/alertmanager/releases/download/v0.21.0/alertmanager-0.21.0.linux-amd64.tar.gz
@@ -58,6 +63,6 @@ rm -rf /tmp/alertmanager-*
 echo && ss -tnlp && echo
 
 #Установить node_exporter
-cd /tmp/albo/Server1
+cd /tmp/albo/2-server-master
 ./6-node-exporter-setup.sh
 

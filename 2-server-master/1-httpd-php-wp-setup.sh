@@ -6,7 +6,7 @@ exit 1; fi
 
 #Устанавка и запуск апача
 #Ключ -y отвечает Да на установку
-sudo yum -y install httpd && sudo systemctl enable httpd && sudo systemctl start httpd
+yum -y install httpd && systemctl enable httpd && systemctl start httpd
 
 #Установка пакетов php
 sudo yum install -y php php-mysqlnd php-json php-pdo php-fpm php-opcache php-gd php-xml php-mbstring php-bcmath php-odbc php-pear php-xmlrpc php-soap
@@ -61,6 +61,6 @@ git clone https://github.com/aboltykhov/albo.git
 echo && hostname -I && echo 
 
 #Установить MySQL 
-cd /tmp/albo/Server1
+cd /tmp/albo/2-server-master
 ./2-new-sql-server-master.sh
 

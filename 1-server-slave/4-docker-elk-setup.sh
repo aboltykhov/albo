@@ -35,3 +35,4 @@ cd /tmp/docker-elk
 docker-compose up
 
 #Всё!
+

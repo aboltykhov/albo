@@ -27,20 +27,11 @@ yum -y install docker-ce docker-ce-cli containerd.io
 systemctl start docker && systemctl enable docker && systemctl status docker
 
 #2)
-#Чтобы воспользоваться образом на другом компьютере, установи докер, далее
-#Ввести учетные данные, создав файл с паролем без вывода в терминал
-rm -rf /tmp/dockerp
-cat <<EOF > /tmp/dockerp
-XLJSaSR4rQpy
-EOF
-cat /tmp/dockerp | docker login --username aboltykhov --password-stdin
-
 #Скачиваем и запускаем образ albo-nginx с измененным конфигом для балансировки портов
 docker pull aboltykhov/albo-nginx:nginx && docker run -d -p 80:80 aboltykhov/albo-nginx:nginx && docker ps -a
 
-rm -rf /tmp/dockerp
-#Установить MySQL слейв, для репликации БД
-cd /tmp/albo/Server2
+#Установить MySQL слейв для репликации БД
+cd /tmp/albo/1-server-slave
 ./2-new-sql-server-slave.sh
 
 #################################################################

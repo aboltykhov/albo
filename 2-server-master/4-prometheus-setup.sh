@@ -1,5 +1,10 @@
 #!/bin/bash
-#Строки с решеткой кроме первой - комментарии
+#Предварительно скрипт проверяет возможность своей работы от пользователя
+if [[ $UID -ne 0 ]]; then
+echo "Скрипт требуется запустить в привилегированном режиме sudo или от пользователя root"
+exit 1; fi
+
+#Установить утилиту для загрузки файлов
 yum install -y wget
 cd /tmp/
 wget https://github.com/prometheus/prometheus/releases/download/v2.20.1/prometheus-2.20.1.linux-amd64.tar.gz
@@ -59,6 +64,6 @@ rm -rf /tmp/prometheus-*
 echo && ss -tnlp && echo
 
 #Установить Alertmanager
-cd /tmp/albo/Server1
+cd /tmp/albo/2-server-master
 ./5-alertm-setup.sh
 

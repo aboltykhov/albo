@@ -20,7 +20,7 @@ yum update
 yum -y install mysql-server && systemctl enable mysqld && systemctl start mysqld && systemctl status mysqld
 
 #настраиваем mysql-server, создаем пароль для root, например - User1589$
-sudo mysql_secure_installation
+mysql_secure_installation
 
 #3)
 #на SLAVE настраиваем репликацию 
@@ -43,20 +43,17 @@ EOF
 
 #Перезапустить службу
 systemctl restart mysqld
-sudo mysql -u root --password=User1589$ < /tmp/albo/SQL/replication-slave.sql
+mysql -u root --password=User1589$ < /tmp/albo/sql/replication-slave.sql
 
 #4)
 #Создать пользователя для передачи бекапов
-#rm -rf /tmp/bkps
-#userdel -rf bkpuser
-useradd --no-create-home --shell /bin/bash bkpuser && echo bkpuser:bKpassword$ | chpasswd
-mkdir -p /tmp/bkps && chown -R bkpuser:bkpuser /tmp/bkps/
+#rm -rf /tmp/bkpuser
+userdel -rf bkpuser
+useradd -c "Backup User MySQL" -m --shell /bin/bash bkpuser && echo bkpuser:bKpassword$ | chpasswd
 
 #5)
-#Снять первый бекап cо СЛЕЙВА 10.0.0.2
-#Без указания даты
-mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /tmp/bkps/backupDB.sql
-#sshpass -p bKpassword$ scp /tmp/bkps/backupDB.sql bkpuser@10.0.0.3:/tmp/bkps/
+#Проверка! Снять первый бекап cо СЛЕЙВА и отправить на сервер бекапов 10.0.0.3
+mysqldump -u root --password=User1589$ --all-databases --events --routines --master-data=1 > /home/bkpuser/backupDB.sql && sshpass -p bKpassword$ scp /home/bkpuser/backupDB.sql bkpuser@10.0.0.3:/home/bkpuser/
 
 #Добавить задания в планировщик crontab
 #Запускать скрипт каждую минуту создавая бекап и отправлять бекап на другой сервер каждую вторую минуту
@@ -64,5 +61,5 @@ crontab < /tmp/albo/crontab.txt
 
 #6)
 #Следующий скрипт node-exporter для снияти метрик сервера
-cd /tmp/albo/Server2
+cd /tmp/albo/1-server-slave
 ./3-node-exporter-client-setup.sh

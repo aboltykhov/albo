@@ -23,7 +23,7 @@ yum update && yum upgrade
 yum -y install mysql-server && systemctl enable mysqld && systemctl start mysqld
 
 #настраиваем mysql-server, создаем пароль для root, например - User1589$
-sudo mysql_secure_installation
+mysql_secure_installation
 
 #3)
 #на МАСТЕРЕ настраиваем репликацию 
@@ -43,30 +43,30 @@ server-id=1
 EOF
 
 #Перезапустить службу
-sudo systemctl restart mysqld  && systemctl status mysqld
+systemctl restart mysqld  && systemctl status mysqld
 
 #4)
 #На МАСТЕРЕ настраиваем репликацию
 #ПРИ НЕОБХОДИМОСТИ меняет IP-адрес для слейва
 #ключ mysql -e "TEXT" означатет выполнить команду в терминале и выйти
 #удобнее импортировать из файла *.sql
-sudo mysql -u root --password=User1589$ < /tmp/albo/SQL/replication.sql
+sudo mysql -u root --password=User1589$ < /tmp/albo/sql/replication.sql
 
 #Создать пользователя root@10.0.0.2 для переноса бекапов в каталог /tmp/ 
-sudo mysql -u root --password=User1589$ < /tmp/albo/SQL/bkp-user.sql
+sudo mysql -u root --password=User1589$ < /tmp/albo/sql/bkp-user.sql
 
 #Создать БД, пользователя wpuser для управления БД CMS WordPress
-sudo mysql -u root --password=User1589$ < /tmp/albo/SQL/wp-db-user.sql
+sudo mysql -u root --password=User1589$ < /tmp/albo/sql/wp-db-user.sql
 
 #Создать таблицу от имени пользователя wpuser, для проверки
-sudo mysql -u wpuser --password=WP1password$ < /tmp/albo/SQL/wp-albo.sql
+sudo mysql -u wpuser --password=WP1password$ < /tmp/albo/sql/wp-albo.sql
 
 #5)
 #Создать пользователя для копирования бекапов
 useradd -c "Backup User MySQL" -b /tmp/ bkpuser && echo bkpuser:bKpassword$ | chpasswd
 
 #Следующий скрипт графана, после графаны - прометей
-cd /tmp/albo/Server1
+cd /tmp/albo/2-server-master
 ./3-grafana-setup.sh
 #################################################################	
 #ПРИМЕРЫ
