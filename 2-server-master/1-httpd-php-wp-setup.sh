@@ -22,12 +22,14 @@ cd /tmp/dz_web_server/
 rm -rf  /var/www/808* /var/www/html/ && echo
 rm -rf  /etc/httpd/conf.d/808* && echo
 mkdir /var/www/8080 /var/www/8081 /var/www/8082 /var/www/html/ && echo
+rm -rf /usr/share/httpd/noindex/index.html.en-US 
 
 #Разворачиваем бекап
 #Ключ -a копировать содежимое с атрибутами
 cp -a /tmp/dz_web_server/web/var/www/8080/* /var/www/8080/ && echo
 cp -a /tmp/dz_web_server/web/var/www/8081/* /var/www/8081/ && echo
 cp -a /tmp/dz_web_server/web/var/www/8082/* /var/www/8082/ && echo
+cp -a /tmp/dz_web_server/web/var/www/8080/index.html /usr/share/httpd/noindex/&& echo
 cp -a /tmp/dz_web_server/web/var/www/html/* /var/www/html/ && echo
 
 cp -a /tmp/dz_web_server/web/etc/httpd/conf.d/8080.conf /etc/httpd/conf.d/ && echo
