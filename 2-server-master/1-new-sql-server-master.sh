@@ -67,7 +67,7 @@ useradd -c "Backup User MySQL" -b /tmp/ bkpuser && echo bkpuser:bKpassword$ | ch
 
 #Следующий скрипт графана, после графаны - прометей
 cd /tmp/albo/2-server-master
-./3-grafana-setup.sh
+./2-httpd-php-wp-setup.sh
 #################################################################	
 #ПРИМЕРЫ
 #Grant user permissions to all tables in my_database from localhost --
