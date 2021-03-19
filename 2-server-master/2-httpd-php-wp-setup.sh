@@ -1,4 +1,6 @@
-f [[ $UID -ne 0 ]]; then
+#!/bin/bash
+#Предварительно скрипт проверяет возможность своей работы от пользователя
+if [[ $UID -ne 0 ]]; then
 echo "Скрипт требуется запустить в привилегированном режиме sudo или от пользователя root"
 exit 1; fi
 
@@ -17,10 +19,10 @@ git clone https://github.com/aboltykhov/dz_web_server.git
 cd /tmp/dz_web_server/
 
 #Создать папки сайтов для примера
-rm -rf  /var/www/808* /var/www/html/ && echo
-rm -rf  /etc/httpd/conf.d/808* && echo
+rm -rf /var/www/808* /var/www/html/ && echo
+rm -rf /etc/httpd/conf.d/808* && echo
+rm -rf /usr/share/httpd/noindex/index.html.en-US && echo
 mkdir /var/www/8080 /var/www/8081 /var/www/8082 /var/www/html/ && echo
-rm -rf /usr/share/httpd/noindex/index.html.en-US 
 
 #Разворачиваем бекап
 #Ключ -a копировать содежимое с атрибутами
@@ -44,7 +46,6 @@ yum -y install wget
 cd /tmp/
 wget http://wordpress.org/latest.tar.gz && tar zvxf latest.tar.gz -C /var/www/html/ && echo
 mkdir /var/www/html/wordpress/wp-content/uploads
-cd /var/www/html/wordpress/ 
 rm -rf /var/www/html/wordpress/wp-config.php
 cp -a /tmp/dz_web_server/web/var/www/html/wordpress/wp-config.php /var/www/html/wordpress/
 chown -R apache:apache /var/www/html/wordpress/
