@@ -57,5 +57,5 @@ echo && ss -tnlp && echo
 
 #Установить ELK
 cd /tmp/albo/1-server-slave
-./4-docker-elk-setup.sh
+./3-docker-elk-nginx-setup.sh
 
