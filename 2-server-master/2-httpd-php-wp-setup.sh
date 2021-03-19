@@ -35,21 +35,18 @@ cp -a /tmp/dz_web_server/web/var/www/html/* /var/www/html/ && echo
 cp -a /tmp/dz_web_server/web/etc/httpd/conf.d/8080.conf /etc/httpd/conf.d/ && echo
 cp -a /tmp/dz_web_server/web/etc/httpd/conf.d/8081.conf /etc/httpd/conf.d/ && echo
 cp -a /tmp/dz_web_server/web/etc/httpd/conf.d/8082.conf /etc/httpd/conf.d/ && echo
-rm -rf /etc/httpd/conf/httpd.conf
-rm -rf /etc/httpd/conf/httpd.conf.bak
+rm -rf /etc/httpd/conf/httpd.conf* && echo
 cp -a /tmp/dz_web_server/web/etc/httpd/conf/httpd.* /etc/httpd/conf/ && echo
 
 #Установить утилиту для загрузки файлов
 yum -y install wget
 
 #Подготовка CMS WordPress 
-cd /tmp/
-wget http://wordpress.org/latest.tar.gz && tar zvxf latest.tar.gz -C /var/www/html/ && echo
-mkdir /var/www/html/wordpress/wp-content/uploads
+cd /tmp/ && wget http://wordpress.org/latest.tar.gz && tar zvxf latest.tar.gz -C /var/www/html/ && echo
 rm -rf /var/www/html/wordpress/wp-config.php
-cp -a /tmp/dz_web_server/web/var/www/html/wordpress/wp-config.php /var/www/html/wordpress/
+cp -a /tmp/dz_web_server/web/var/www/html/wordpress/wp-config.php /var/www/html/wordpress/ && echo
 chown -R apache:apache /var/www/html/wordpress/
-rm -Rf /tmp/wordpress/ && rm -Rf /tmp/latest.tar.gz
+rm -Rf /tmp/latest.tar.gz
 
 #Перечитать конфигурацию и показать статус
 systemctl restart httpd && systemctl status httpd
