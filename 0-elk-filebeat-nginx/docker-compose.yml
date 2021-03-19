@@ -74,6 +74,7 @@ services:
       context: nginx/
     volumes:
       - ./nginx/config:/etc/nginx/:ro
+      - ./nginx/config:/etc/nginx/conf.d:ro
       - ./nginx/log:/var/log/nginx:ro
     ports:
       - "80:80"
