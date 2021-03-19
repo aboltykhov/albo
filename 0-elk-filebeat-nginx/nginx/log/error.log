@@ -22,3 +22,15 @@
 2021/03/19 11:20:14 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
 2021/03/19 11:32:24 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
 2021/03/19 11:32:24 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
+2021/03/19 14:45:36 [error] 22#22: *1 connect() failed (113: Host is unreachable) while connecting to upstream, client: 109.252.60.147, server: 10.0.0.2, request: "GET / HTTP/1.1", upstream: "http://10.0.0.1:8080/", host: "185.177.95.17"
+2021/03/19 14:45:36 [warn] 22#22: *1 upstream server temporarily disabled while connecting to upstream, client: 109.252.60.147, server: 10.0.0.2, request: "GET / HTTP/1.1", upstream: "http://10.0.0.1:8080/", host: "185.177.95.17"
+2021/03/19 14:45:39 [error] 22#22: *1 connect() failed (113: Host is unreachable) while connecting to upstream, client: 109.252.60.147, server: 10.0.0.2, request: "GET / HTTP/1.1", upstream: "http://10.0.0.1:8081/", host: "185.177.95.17"
+2021/03/19 14:45:39 [warn] 22#22: *1 upstream server temporarily disabled while connecting to upstream, client: 109.252.60.147, server: 10.0.0.2, request: "GET / HTTP/1.1", upstream: "http://10.0.0.1:8081/", host: "185.177.95.17"
+2021/03/19 14:45:42 [error] 22#22: *1 connect() failed (113: Host is unreachable) while connecting to upstream, client: 109.252.60.147, server: 10.0.0.2, request: "GET / HTTP/1.1", upstream: "http://10.0.0.1:8082/", host: "185.177.95.17"
+2021/03/19 14:45:42 [warn] 22#22: *1 upstream server temporarily disabled while connecting to upstream, client: 109.252.60.147, server: 10.0.0.2, request: "GET / HTTP/1.1", upstream: "http://10.0.0.1:8082/", host: "185.177.95.17"
+2021/03/19 14:49:04 [error] 22#22: *5 connect() failed (113: Host is unreachable) while connecting to upstream, client: 109.252.60.147, server: 10.0.0.2, request: "GET / HTTP/1.1", upstream: "http://10.0.0.1:8082/", host: "185.177.95.17"
+2021/03/19 14:49:04 [warn] 22#22: *5 upstream server temporarily disabled while connecting to upstream, client: 109.252.60.147, server: 10.0.0.2, request: "GET / HTTP/1.1", upstream: "http://10.0.0.1:8082/", host: "185.177.95.17"
+2021/03/19 14:49:07 [error] 22#22: *5 connect() failed (113: Host is unreachable) while connecting to upstream, client: 109.252.60.147, server: 10.0.0.2, request: "GET / HTTP/1.1", upstream: "http://10.0.0.1:8081/", host: "185.177.95.17"
+2021/03/19 14:49:07 [warn] 22#22: *5 upstream server temporarily disabled while connecting to upstream, client: 109.252.60.147, server: 10.0.0.2, request: "GET / HTTP/1.1", upstream: "http://10.0.0.1:8081/", host: "185.177.95.17"
+2021/03/19 14:49:10 [error] 22#22: *5 connect() failed (113: Host is unreachable) while connecting to upstream, client: 109.252.60.147, server: 10.0.0.2, request: "GET / HTTP/1.1", upstream: "http://10.0.0.1:8080/", host: "185.177.95.17"
+2021/03/19 14:49:10 [warn] 22#22: *5 upstream server temporarily disabled while connecting to upstream, client: 109.252.60.147, server: 10.0.0.2, request: "GET / HTTP/1.1", upstream: "http://10.0.0.1:8080/", host: "185.177.95.17"
