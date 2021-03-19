@@ -18,11 +18,11 @@
 
 #############################################################
 
-С каждого сервера проверяем SSH подключение: ssh -T username@ip -p 22
+С каждого сервера проверяем SSH подключение: >ssh -T username@ip -p 22
 
-Устанавливаем и настраиваем GIT: sudo yum -y install git
+Устанавливаем и настраиваем GIT: >sudo yum -y install git
 
-Скачиваем репозиторий в /tmp: git clone https://github.com/aboltykhov/albo.git
+Скачиваем репозиторий в /tmp: >git clone https://github.com/aboltykhov/albo.git
 
 #############################################################
 
