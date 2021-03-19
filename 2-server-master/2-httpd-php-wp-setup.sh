@@ -21,7 +21,7 @@ cd /tmp/dz_web_server/
 #Создать папки сайтов для примера
 rm -rf /var/www/808* /var/www/html/ && echo
 rm -rf /etc/httpd/conf.d/808* && echo
-rm -rf /usr/share/httpd/noindex/index.html.en-US && echo
+rm -rf /usr/share/httpd/noindex/index.html* && echo
 mkdir /var/www/8080 /var/www/8081 /var/www/8082 /var/www/html/ && echo
 
 #Разворачиваем бекап
@@ -30,7 +30,8 @@ cp -a /tmp/dz_web_server/web/var/www/8080/* /var/www/8080/ && echo
 cp -a /tmp/dz_web_server/web/var/www/8081/* /var/www/8081/ && echo
 cp -a /tmp/dz_web_server/web/var/www/8082/* /var/www/8082/ && echo
 cp -a /tmp/dz_web_server/web/var/www/8080/index.html /usr/share/httpd/noindex/ && echo
-cp -a /tmp/dz_web_server/web/var/www/html/* /var/www/html/ && echo
+cp -a /tmp/dz_web_server/web/var/www/html/albo.php /var/www/html/ && echo
+cp -a /tmp/dz_web_server/web/var/www/html/index.html /var/www/html/ && echo
 
 cp -a /tmp/dz_web_server/web/etc/httpd/conf.d/8080.conf /etc/httpd/conf.d/ && echo
 cp -a /tmp/dz_web_server/web/etc/httpd/conf.d/8081.conf /etc/httpd/conf.d/ && echo
@@ -42,10 +43,11 @@ cp -a /tmp/dz_web_server/web/etc/httpd/conf/httpd.* /etc/httpd/conf/ && echo
 yum -y install wget
 
 #Подготовка CMS WordPress 
-cd /tmp/ && wget http://wordpress.org/latest.tar.gz && tar zvxf latest.tar.gz -C /var/www/html/ && echo
-rm -rf /var/www/html/wordpress/wp-config.php
-cp -a /tmp/dz_web_server/web/var/www/html/wordpress/wp-config.php /var/www/html/wordpress/ && echo
-chown -R apache:apache /var/www/html/wordpress/
+cd /tmp/ && wget http://wordpress.org/latest.tar.gz && tar zvxf latest.tar.gz -C /var/www/8080/ && echo
+mv /var/www/8080/wordpress/* /var/www/8080/
+rm -rf /var/www/8080/wordpress/
+cp -a /tmp/dz_web_server/web/var/www/html/wordpress/wp-config.php /var/www/8080/ && echo
+chown -R apache:apache /var/www/8080/
 rm -Rf /tmp/latest.tar.gz
 
 #Перечитать конфигурацию и показать статус
