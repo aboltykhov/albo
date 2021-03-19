@@ -70,7 +70,8 @@ services:
       - elasticsearch
 
   nginx:
-    build: 
+    build:
+      context: nginx/
     volumes:
       - ./nginx/config:/etc/nginx/
       - ./nginx/log:/var/log/nginx
@@ -81,6 +82,7 @@ services:
 
   filebeat:
     build:
+      context: filebeat/
     entrypoint: "filebeat -e -strict.perms=false"
     volumes:
       - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
