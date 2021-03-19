@@ -11,11 +11,12 @@ exit 1; fi
 #Ключ -f не выводить ошибок при открытии страницы
 #Ключ -L повторный запрос страницы, в случае если страницу переместили
 #Ключ -sS показать сообщения об ошибке в случае сбоя
+yum -y install yum-utils
 yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
 curl -fsSL https://get.docker.com/ | sh
-yum update && yum -y install yum-utils docker-ce docker-ce-cli containerd.io
+yum update && yum -y install docker-ce docker-ce-cli containerd.io
 
 #Добавить прав пользователю для управления докером без привелегий
 #usermod -aG docker <username>
