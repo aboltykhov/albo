@@ -67,7 +67,7 @@ EOF
 chown -R prometheus:prometheus /etc/prometheus
 
 #Перезагружаем и провермяем prometheus
-sudo systemctl daemon-reload && sudo systemctl restart prometheus && sudo systemctl status prometheus
+systemctl daemon-reload && systemctl restart prometheus && systemctl status prometheus
 
 #Показать порты
 echo && ss -tnlp && echo

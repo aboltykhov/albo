@@ -47,7 +47,7 @@ EOF
 chown -R nodeusr:nodeusr /usr/local/bin/node_exporter
 
 #Перечитываем конфигурацию systemd:
-sudo systemctl daemon-reload && sudo systemctl enable node_exporter && sudo systemctl start node_exporter  
+systemctl daemon-reload && systemctl enable node_exporter && systemctl start node_exporter  
 
 #Удалить установочный пакет 
 rm -rf /tmp/node_exporter-*

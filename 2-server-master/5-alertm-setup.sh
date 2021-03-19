@@ -54,7 +54,7 @@ EOF
 chown alertmanager:alertmanager /usr/local/bin/{alertmanager,amtool}
 
 #Перечитываем конфигурацию
-sudo systemctl daemon-reload && sudo systemctl enable alertmanager && sudo systemctl start alertmanager
+systemctl daemon-reload && systemctl enable alertmanager && systemctl start alertmanager
 
 #Удалить установочный пакет 
 rm -rf /tmp/alertmanager-*

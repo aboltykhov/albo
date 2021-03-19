@@ -55,7 +55,7 @@ EOF
 chown -R prometheus:prometheus /var/lib/prometheus
 
 #Перечитываем конфигурацию
-sudo systemctl daemon-reload && sudo systemctl enable prometheus && sudo systemctl start prometheus
+systemctl daemon-reload && systemctl enable prometheus && systemctl start prometheus
 
 #Удалить установочный пакет 
 rm -rf /tmp/prometheus-*
