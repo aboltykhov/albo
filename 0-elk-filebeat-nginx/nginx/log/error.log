@@ -1,1 +1,5 @@
 2021/03/19 10:11:19 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2021/03/19 10:28:26 [emerg] 1#1: unexpected end of file, expecting "}" in /etc/nginx/conf.d/albo.conf:17
+2021/03/19 10:31:34 [emerg] 1#1: unexpected end of file, expecting "}" in /etc/nginx/conf.d/albo.conf:17
+2021/03/19 10:36:03 [emerg] 1#1: unexpected end of file, expecting "}" in /etc/nginx/conf.d/albo.conf:17
+2021/03/19 10:36:28 [emerg] 1#1: unexpected end of file, expecting "}" in /etc/nginx/conf.d/albo.conf:17
