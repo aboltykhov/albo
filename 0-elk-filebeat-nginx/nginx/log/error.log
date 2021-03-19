@@ -5,3 +5,20 @@
 2021/03/19 10:36:28 [emerg] 1#1: unexpected end of file, expecting "}" in /etc/nginx/conf.d/albo.conf:17
 2021/03/19 10:53:33 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
 2021/03/19 10:53:33 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
+2021/03/19 10:58:18 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
+2021/03/19 10:58:18 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
+2021/03/19 11:00:02 [emerg] 1#1: invalid number of arguments in "proxy_pass" directive in /etc/nginx/conf.d/albo.conf:5
+2021/03/19 11:00:53 [emerg] 1#1: invalid number of arguments in "proxy_pass" directive in /etc/nginx/conf.d/albo.conf:9
+2021/03/19 11:01:47 [emerg] 1#1: invalid number of arguments in "proxy_pass" directive in /etc/nginx/conf.d/albo.conf:9
+2021/03/19 11:02:34 [emerg] 1#1: unexpected "}" in /etc/nginx/conf.d/albo.conf:8
+2021/03/19 11:05:01 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
+2021/03/19 11:05:01 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
+2021/03/19 11:06:18 [emerg] 1#1: invalid parameter "on" in /etc/nginx/conf.d/albo.conf:12
+2021/03/19 11:08:04 [emerg] 1#1: invalid parameter "on" in /etc/nginx/conf.d/albo.conf:12
+2021/03/19 11:08:46 [emerg] 1#1: invalid parameter "of" in /etc/nginx/conf.d/albo.conf:12
+2021/03/19 11:10:52 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
+2021/03/19 11:10:52 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
+2021/03/19 11:20:14 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
+2021/03/19 11:20:14 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
+2021/03/19 11:32:24 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored
+2021/03/19 11:32:24 [warn] 1#1: conflicting server name "10.0.0.2" on 0.0.0.0:80, ignored

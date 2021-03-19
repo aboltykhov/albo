@@ -87,6 +87,7 @@ services:
     volumes:
       - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - ./nginx/log:/var/log/nginx
+      - ./filebeat/modules.d/nginx.yml:/etc/filebeat/modules.d/nginx.yml
     networks:
       - elk
     depends_on: 
