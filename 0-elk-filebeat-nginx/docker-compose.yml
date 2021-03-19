@@ -73,9 +73,8 @@ services:
     build:
       context: nginx/
     volumes:
-      - ./nginx/config:/etc/nginx/:ro
-      - ./nginx/config:/etc/nginx/conf.d:ro
-      - ./nginx/log:/var/log/nginx:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/log:/var/log/nginx
     ports:
       - "80:80"
     networks:
@@ -86,8 +85,8 @@ services:
       context: filebeat/
     entrypoint: "filebeat -e -strict.perms=false"
     volumes:
-      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
-      - ./nginx/log:/var/log/nginx:ro
+      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./nginx/log:/var/log/nginx
     networks:
       - elk
     depends_on: 
