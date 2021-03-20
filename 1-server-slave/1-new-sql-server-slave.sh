@@ -43,7 +43,7 @@ EOF
 
 #Перезапустить службу
 systemctl restart mysqld
-mysql -u root --password=User1589$ < /tmp/albo/sql/replication-slave.sql
+#mysql -u root --password=User1589$ < /tmp/albo/sql/replication-slave.sql
 
 #4)
 #Создать пользователя для передачи бекапов
