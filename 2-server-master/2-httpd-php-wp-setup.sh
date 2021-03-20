@@ -31,7 +31,7 @@ cp -a /tmp/dz_web_server/web/var/www/8081/* /var/www/8081/ && echo
 cp -a /tmp/dz_web_server/web/var/www/8082/* /var/www/8082/ && echo
 cp -a /tmp/dz_web_server/web/var/www/8080/index.html /usr/share/httpd/noindex/ && echo
 cp -a /tmp/dz_web_server/web/var/www/html/albo.php /var/www/html/ && echo
-cp -a /tmp/dz_web_server/web/var/www/html/index.html /var/www/html/ && echo
+cp -a /tmp/dz_web_server/web/var/www/8080/index.html /var/www/html/ && echo
 
 cp -a /tmp/dz_web_server/web/etc/httpd/conf.d/8080.conf /etc/httpd/conf.d/ && echo
 cp -a /tmp/dz_web_server/web/etc/httpd/conf.d/8081.conf /etc/httpd/conf.d/ && echo
