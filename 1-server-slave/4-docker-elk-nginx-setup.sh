@@ -41,9 +41,6 @@ cd /tmp/albo/0-elk-filebeat-nginx/
 docker-compose up --build
 #docker-compose up
 
-#Устанавливаем службу управления доступом к портам
-cd /tmp/albo/1-server-slave
-./4-iptables-slave-import.sh
 #################################################################
 #Удалить контейнер, удалить несколько через пробел
 #

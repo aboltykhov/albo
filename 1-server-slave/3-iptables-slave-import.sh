@@ -19,6 +19,8 @@ systemctl disable firewalld.service
 #Сохраняем правила
 service iptables save
 
+#Установить ELK stack
+./4-docker-elk-nginx-setup.sh
 ####################################################################
 #Перед тем как удалить все правила
 #iptables -L -n -v --line-numbers

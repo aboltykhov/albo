@@ -55,7 +55,7 @@ rm -rf /tmp/node_exporter-*
 #Показать порты
 echo && ss -tnlp && echo
 
-#Установить ELK
+#Устанавливаем службу управления доступом к портам
 cd /tmp/albo/1-server-slave
-./3-docker-elk-nginx-setup.sh
+./3-iptables-slave-import.sh
 
