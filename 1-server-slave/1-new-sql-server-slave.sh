@@ -63,3 +63,4 @@ crontab < /tmp/albo/crontab.txt
 #Следующий скрипт node-exporter для снияти метрик сервера
 cd /tmp/albo/1-server-slave
 ./2-node-exporter-client-setup.sh
+

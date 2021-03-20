@@ -68,7 +68,12 @@ chown -R prometheus:prometheus /etc/prometheus
 
 #Перезагружаем и провермяем prometheus
 systemctl daemon-reload && systemctl restart prometheus && systemctl status prometheus
+#####################################################################
 
 #Показать порты
 echo && ss -tnlp && echo
+
+#Устанавливаем службу управления доступом к портам
+cd /tmp/albo/2-server-master
+./8-iptables-master-import.sh
 

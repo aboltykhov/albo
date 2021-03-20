@@ -41,9 +41,9 @@ cd /tmp/albo/0-elk-filebeat-nginx/
 docker-compose up --build
 #docker-compose up
 
-#Установить MySQL слейв для репликации БД
+#Устанавливаем службу управления доступом к портам
 cd /tmp/albo/1-server-slave
-./2-new-sql-server-slave.sh
+./4-iptables-slave-import.sh
 #################################################################
 #Удалить контейнер, удалить несколько через пробел
 #

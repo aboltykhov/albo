@@ -1,0 +1,21 @@
+
+*filter
+:INPUT DROP [61:3008]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [1678:216961]
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 8080 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 8081 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 8082 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 9090 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 9093 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 9094 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 9100 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 3000 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 3306 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 33060 -j ACCEPT
+-A INPUT -p udp -m udp --dport 9094 -j ACCEPT
+COMMIT
+
