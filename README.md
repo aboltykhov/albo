@@ -18,15 +18,18 @@
 
 #############################################################
 
-С каждого сервера проверяем SSH подключение: ssh username@ip_address -p 22
+С каждого сервера проверяем SSH подключение: 
+        ssh username@ip_address -p 22
 
-Устанавливаем и настраиваем GIT: sudo yum -y install git
+Устанавливаем и настраиваем GIT: 
+        sudo yum -y install git
 
-Скачиваем репозиторий, например в /tmp: git clone https://github.com/aboltykhov/albo.git
+Скачиваем репозиторий, например в /tmp: 
+        git clone https://github.com/aboltykhov/albo.git
 
 #############################################################
 
-        Каталог albo
+>Каталог albo
 
 #############################################################
 
@@ -119,7 +122,7 @@
 
 На "Сервер-реплика" импортируем конфигурацию
 
-- mysql -u root --password=User1589$ < /tmp/albo/sql/replication-slave.sql
+        mysql -u root --password=User1589$ < /tmp/albo/sql/replication-slave.sql
 
 #############################################################
 #############################################################
@@ -128,11 +131,11 @@
 
 Создать БД, пользователя wpuser для управления БД CMS WordPress
 
-mysql -u root --password=User1589$ < /tmp/albo/sql/wp-db-user.sql
+        mysql -u root --password=User1589$ < /tmp/albo/sql/wp-db-user.sql
 
 Создать таблицу от имени пользователя wpuser
 
-mysql -u wpuser --password=WP1password$ < /tmp/albo/sql/wp-albo.sql
+        mysql -u wpuser --password=WP1password$ < /tmp/albo/sql/wp-albo.sql
 
 #############################################################
 
