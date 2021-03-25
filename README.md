@@ -36,11 +36,11 @@
 
 >> 0-elk-filebeat-nginx		#Подкаталог: стек Elasticsearch/Logstash/Kibana/Filebeat для Docker Compose
 
->> 1-server-slave				#Подкаталог: сервер-реплика
->>> 1-new-sql-server-slave.sh		#Установка СУБД MySQL c настриваемой репликацией master/slave
->>> 2-node-exporter-client-setup.sh	#Установка Node Exporter для сбора метрик сервера-реплики
->>> 3-iptables-slave-import.sh		#Установка утилиты iptables для управления доступом по портам
->>> 4-docker-elk-nginx-setup.sh		#Установка стека (Elasticsearch/Logstash/Kibana) и Filebeat для мониторинга nginx в Docker
+>> 1-server-slave #Подкаталог: сервер-реплика  
+>>> 1-new-sql-server-slave.sh #Установка СУБД MySQL c настриваемой репликацией master/slave  
+>>> 2-node-exporter-client-setup.sh #Установка Node Exporter для сбора метрик сервера-реплики  
+>>> 3-iptables-slave-import.sh #Установка утилиты iptables для управления доступом по портам  
+>>> 4-docker-elk-nginx-setup.sh #Установка стека (Elasticsearch/Logstash/Kibana) и Filebeat для мониторинга nginx в Docker  
 >> 
 
 >> 2-server-master				#Подкаталог: основной сервер
@@ -142,3 +142,4 @@
 > Пользователь: elastic
 
 > Пароль: changeme
+
