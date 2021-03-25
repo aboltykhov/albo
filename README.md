@@ -37,7 +37,6 @@
 >> 0-elk-filebeat-nginx		#Подкаталог: стек Elasticsearch/Logstash/Kibana/Filebeat для Docker Compose
 
 >> 1-server-slave				#Подкаталог: сервер-реплика
-
 >>> 1-new-sql-server-slave.sh		#Установка СУБД MySQL c настриваемой репликацией master/slave
 
 >>> 2-node-exporter-client-setup.sh	#Установка Node Exporter для сбора метрик сервера-реплики
@@ -45,9 +44,9 @@
 >>> 3-iptables-slave-import.sh		#Установка утилиты iptables для управления доступом по портам
 
 >>> 4-docker-elk-nginx-setup.sh		#Установка стека (Elasticsearch/Logstash/Kibana) и Filebeat для мониторинга nginx в Docker
+>> 1-server-slave				#Подкаталог: сервер-реплика
 
 >> 2-server-master				#Подкаталог: основной сервер
-
 >>> 1-new-sql-server-master.sh	#СУБД MySQL c настриваемой репликацией master/slave
 
 >>> 2-httpd-php-wp-setup.sh		#Установка веб-сервера на базе LAMP, CMS WordPress
@@ -63,9 +62,10 @@
 >>> 7-targets-node-setup.sh		#Добавление хостов для мониторинга
 
 >>> 8-iptables-master-import.sh	#Установка утилиты iptables для управления доступом по портам
+>> 2-server-master				#Подкаталог: основной сервер
 
 >> sql					      	#Подкаталог: sql-запросы 
-
+> 
 > Каталог albo
 
 ---
