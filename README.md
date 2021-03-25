@@ -52,9 +52,9 @@
 
 - 2-node-exporter-client-setup.sh	#Установка Node Exporter для сбора метрик сервера-реплики
 
-- 3-docker-elk-nginx-setup.sh		#Установка стека (Elasticsearch/Logstash/Kibana) и Filebeat для мониторинга nginx в Docker
+- 3-iptables-slave-import.sh		#Установка утилиты iptables для управления доступом по портам
 
-- 4-iptables-slave-import.sh		#Установка утилиты iptables для управления доступом по портам
+- 4-docker-elk-nginx-setup.sh		#Установка стека (Elasticsearch/Logstash/Kibana) и Filebeat для мониторинга nginx в Docker
 
 #############################################################
 
