@@ -46,7 +46,7 @@
 
 >>> 4-docker-elk-nginx-setup.sh		#Установка стека (Elasticsearch/Logstash/Kibana) и Filebeat для мониторинга nginx в Docker
 
->> 2-server-master			#Подкаталог: основной сервер
+>> 2-server-master				#Подкаталог: основной сервер
 
 >>> 1-new-sql-server-master.sh	#СУБД MySQL c настриваемой репликацией master/slave
 
@@ -65,6 +65,8 @@
 >>> 8-iptables-master-import.sh	#Установка утилиты iptables для управления доступом по портам
 
 >> sql					      	#Подкаталог: sql-запросы 
+
+> Каталог albo
 
 ---
 
