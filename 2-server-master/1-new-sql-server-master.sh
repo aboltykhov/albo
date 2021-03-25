@@ -50,16 +50,16 @@ systemctl restart mysqld  && systemctl status mysqld
 #ПРИ НЕОБХОДИМОСТИ меняет IP-адрес для слейва
 #ключ mysql -e "TEXT" означатет выполнить команду в терминале и выйти
 #удобнее импортировать из файла *.sql
-mysql -u root --password=User1589$ < /tmp/albo/sql/replication.sql
+mysql -u root --password=User1589$ < /tmp/albo/3-sql/replication.sql
 
 #Создать пользователя root@10.0.0.2 для переноса бекапов в каталог /tmp/ 
-mysql -u root --password=User1589$ < /tmp/albo/sql/bkp-user.sql
+mysql -u root --password=User1589$ < /tmp/albo/3-sql/bkp-user.sql
 
 #Создать БД, пользователя wpuser для управления БД CMS WordPress
-#mysql -u root --password=User1589$ < /tmp/albo/sql/wp-db-user.sql
+#mysql -u root --password=User1589$ < /tmp/albo/3-sql/wp-db-user.sql
 
 #Создать таблицу от имени пользователя wpuser, для проверки
-#mysql -u wpuser --password=WP1password$ < /tmp/albo/sql/wp-albo.sql
+#mysql -u wpuser --password=WP1password$ < /tmp/albo/3-sql/wp-albo.sql
 
 #5)
 #Создать пользователя для копирования бекапов

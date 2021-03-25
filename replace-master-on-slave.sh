@@ -5,6 +5,6 @@ echo "Скрипт требуется запустить в привилегир
 exit 1; fi
 
 #Меняем мастера для репликации
-#Указываем binlog.000000 и MASTER_LOG_POS=000000 нового мастера в slq/change-sql-binlog.sql
-mysql -u root --password=User1589$ < /tmp/albo/sql/change-sql-binlog.sql
+#Указываем binlog.000000 и MASTER_LOG_POS=000000 нового мастера в 3-slq/change-sql-binlog.sql
+mysql -u root --password=User1589$ < /tmp/albo/3-sql/change-sql-binlog.sql
 
