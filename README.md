@@ -44,7 +44,7 @@
 >>> 3-iptables-slave-import.sh		#Установка утилиты iptables для управления доступом по портам
 
 >>> 4-docker-elk-nginx-setup.sh		#Установка стека (Elasticsearch/Logstash/Kibana) и Filebeat для мониторинга nginx в Docker
->> 1-server-slave				#Подкаталог: сервер-реплика
+>> 
 
 >> 2-server-master				#Подкаталог: основной сервер
 >>> 1-new-sql-server-master.sh	#СУБД MySQL c настриваемой репликацией master/slave
@@ -62,11 +62,10 @@
 >>> 7-targets-node-setup.sh		#Добавление хостов для мониторинга
 
 >>> 8-iptables-master-import.sh	#Установка утилиты iptables для управления доступом по портам
->> 2-server-master				#Подкаталог: основной сервер
+>> 
 
 >> sql					      	#Подкаталог: sql-запросы 
 > 
-> Каталог albo
 
 ---
 
@@ -154,4 +153,3 @@
 
 > Пароль: changeme
 
----
