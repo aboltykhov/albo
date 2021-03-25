@@ -34,6 +34,7 @@
 
 > Каталог albo
 >> 0-elk-filebeat-nginx #Подкаталог: стек Elasticsearch/Logstash/Kibana/Filebeat для Docker Compose
+>>
 >> 1-server-slave #Подкаталог: сервер-реплика
 >>> 1-new-sql-server-slave.sh #Установка СУБД MySQL c настриваемой репликацией master/slave  
 >>> 2-node-exporter-client-setup.sh #Установка Node Exporter для сбора метрик сервера-реплики  
