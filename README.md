@@ -38,29 +38,19 @@
 
 >> 1-server-slave				#Подкаталог: сервер-реплика
 >>> 1-new-sql-server-slave.sh		#Установка СУБД MySQL c настриваемой репликацией master/slave
-
 >>> 2-node-exporter-client-setup.sh	#Установка Node Exporter для сбора метрик сервера-реплики
-
 >>> 3-iptables-slave-import.sh		#Установка утилиты iptables для управления доступом по портам
-
 >>> 4-docker-elk-nginx-setup.sh		#Установка стека (Elasticsearch/Logstash/Kibana) и Filebeat для мониторинга nginx в Docker
 >> 
 
 >> 2-server-master				#Подкаталог: основной сервер
 >>> 1-new-sql-server-master.sh	#СУБД MySQL c настриваемой репликацией master/slave
-
 >>> 2-httpd-php-wp-setup.sh		#Установка веб-сервера на базе LAMP, CMS WordPress
-
 >>> 3-grafana-setup.sh			#Веб-приложение для визуализации мониторинга
-
 >>> 4-prometheus.sh				#Установка Prometheus системы мониторинга 
-
 >>> 5-alertm-setup.sh			#Установка Alertmanager для отправки уведоблений
-
 >>> 6-node-exporter-setup.sh		#Установка Node Exporter для сбора метрик
-
 >>> 7-targets-node-setup.sh		#Добавление хостов для мониторинга
-
 >>> 8-iptables-master-import.sh	#Установка утилиты iptables для управления доступом по портам
 >> 
 
@@ -152,4 +142,3 @@
 > Пользователь: elastic
 
 > Пароль: changeme
-
