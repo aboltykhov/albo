@@ -30,54 +30,51 @@
 
         git clone https://github.com/aboltykhov/albo.git
 
-#############################################################
+---
 
-- Каталог albo
+> Каталог albo
 
-#############################################################
+>> 0-elk-filebeat-nginx		#Подкаталог: стек Elasticsearch/Logstash/Kibana/Filebeat для Docker Compose
 
-- 0-elk-filebeat-nginx			#Подкаталог: стек Elasticsearch/Logstash/Kibana/Filebeat для Docker Compose
+>> 1-server-slave				#Подкаталог: сервер-реплика
 
-- 1-server-slave				#Подкаталог: сервер-реплика
+>>> 1-new-sql-server-slave.sh		#Установка СУБД MySQL c настриваемой репликацией master/slave
 
-- 2-server-master				#Подкаталог: основной сервер
+>>> 2-node-exporter-client-setup.sh	#Установка Node Exporter для сбора метрик сервера-реплики
 
-- sql					      		#Подкаталог: sql-запросы 
+>>> 3-iptables-slave-import.sh		#Установка утилиты iptables для управления доступом по портам
 
-#############################################################
+>>> 4-docker-elk-nginx-setup.sh		#Установка стека (Elasticsearch/Logstash/Kibana) и Filebeat для мониторинга nginx в Docker
+
+>> 2-server-master			#Подкаталог: основной сервер
+
+>>> 1-new-sql-server-master.sh	#СУБД MySQL c настриваемой репликацией master/slave
+
+>>> 2-httpd-php-wp-setup.sh		#Установка веб-сервера на базе LAMP, CMS WordPress
+
+>>> 3-grafana-setup.sh			#Веб-приложение для визуализации мониторинга
+
+>>> 4-prometheus.sh				#Установка Prometheus системы мониторинга 
+
+>>> 5-alertm-setup.sh			#Установка Alertmanager для отправки уведоблений
+
+>>> 6-node-exporter-setup.sh		#Установка Node Exporter для сбора метрик
+
+>>> 7-targets-node-setup.sh		#Добавление хостов для мониторинга
+
+>>> 8-iptables-master-import.sh	#Установка утилиты iptables для управления доступом по портам
+
+>> sql					      	#Подкаталог: sql-запросы 
+
+---
 
 Внутри каталога albo/1-server-slave:
 
-- 1-new-sql-server-slave.sh		#Установка СУБД MySQL c настриваемой репликацией master/slave
-
-- 2-node-exporter-client-setup.sh	#Установка Node Exporter для сбора метрик сервера-реплики
-
-- 3-iptables-slave-import.sh		#Установка утилиты iptables для управления доступом по портам
-
-- 4-docker-elk-nginx-setup.sh		#Установка стека (Elasticsearch/Logstash/Kibana) и Filebeat для мониторинга nginx в Docker
-
-#############################################################
+---
 
 Внутри каталога albo/2-server-master:
 
-- 1-new-sql-server-master.sh		#СУБД MySQL c настриваемой репликацией master/slave
-
-- 2-httpd-php-wp-setup.sh		#Установка веб-сервера на базе LAMP, CMS WordPress
-
-- 3-grafana-setup.sh				#Веб-приложение для визуализации мониторинга
-
-- 4-prometheus.sh				#Установка Prometheus системы мониторинга 
-
-- 5-alertm-setup.sh				#Установка Alertmanager для отправки уведоблений
-
-- 6-node-exporter-setup.sh		#Установка Node Exporter для сбора метрик
-
-- 7-targets-node-setup.sh			#Добавление хостов для мониторинга
-
-- 8-iptables-master-import.sh		#Установка утилиты iptables для управления доступом по портам
-
-#############################################################
-#############################################################
+---
 
 ### Установка на "Сервере-реплика":
 
@@ -97,8 +94,7 @@
 
 Установите пароль: User1589$
 
-#############################################################
-#############################################################
+---
 
 ### Установка на Основном сервере:
 
@@ -118,8 +114,7 @@
 
 Установите пароль: User1589$
 
-#############################################################
-#############################################################
+---
 
 ### На "Сервер-реплика"
 
@@ -131,8 +126,7 @@
 
         mysql -u root --password=User1589$ < /tmp/albo/sql/replication-slave.sql
 
-#############################################################
-#############################################################
+---
 
 ### На "Основном сервере"
 
@@ -144,18 +138,18 @@
 
         mysql -u wpuser --password=WP1password$ < /tmp/albo/sql/wp-albo.sql
 
-#############################################################
+---
 
 #### Сервер-реплика: готов
 
 #### Основной сервер: готов
 
-#############################################################
+---
 
 Домашняя страница Kibana http://10.0.0.2:5601 http://185.177.95.17:5601/
 
->Пользователь: elastic
+> Пользователь: elastic
 
->Пароль: changeme
+> Пароль: changeme
 
-#############################################################
+---
