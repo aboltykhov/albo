@@ -58,9 +58,9 @@
 
 ### Установка на "Сервере-реплика":
 
-Заходим в подкаталог 1-server-slave
+Заходим в подкаталог 1-server-slave, отключаем SELinux
 
-        ./0-selinux-off.sh #Отключаем SELinux
+        ./0-selinux-off.sh
 
 Перезагружаемся,
 
@@ -78,9 +78,9 @@
 
 ### Установка на Основном сервере:
 
-Заходим в подкаталог 2-server-master
+Заходим в подкаталог 2-server-master, отключаем SELinux
 
-        ./0-selinux-off.sh #Отключаем SELinux
+        ./0-selinux-off.sh
 
 Перезагружаемся,
 
@@ -98,13 +98,13 @@
 
 ### На "Сервер-реплика"
 
-В файле sql/replication-slave.sql
+В файле albo/3-sql/replication-slave.sql
 
 Указываем binlog и MASTER_LOG_POS "Основного сервера"
 
 На "Сервер-реплика" импортируем конфигурацию
 
-        mysql -u root --password=User1589$ < /tmp/albo/sql/replication-slave.sql
+        mysql -u root --password=User1589$ < /tmp/albo/3-sql/replication-slave.sql
 
 ---
 
@@ -112,11 +112,11 @@
 
 Создать БД для CMS WordPress
 
-        mysql -u root --password=User1589$ < /tmp/albo/sql/wp-db-user.sql
+        mysql -u root --password=User1589$ < /tmp/albo/3-sql/wp-db-user.sql
 
 Создать таблицу в БД от имени пользователя wpuser
 
-        mysql -u wpuser --password=WP1password$ < /tmp/albo/sql/wp-albo.sql
+        mysql -u wpuser --password=WP1password$ < /tmp/albo/3-sql/wp-albo.sql
 
 ---
 
